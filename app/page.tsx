@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Lines from "@/images/abstract.png";
 import Lines2 from "@/images/abstract_top.png";
@@ -6,9 +7,20 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import "@/app/globals.css"
+import "@/app/globals.css";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
+
+  const NavigateRecovery = () => {
+    router.push("/auth/recovery");
+  };
+
+  const Login = () => {
+    router.push("/auth/otp-scan");
+  };
+
   return (
     <div className="bg-[#0B6540] w-full h-screen flex items-center justify-center login_container">
       <Image
@@ -72,12 +84,16 @@ export default function Home() {
               ></Input>
             </div>
             <Button
+              onClick={NavigateRecovery}
               variant={"ghost"}
               className="hover:bg-[transparent] cursor-pointer w-auto p-0 m-0 flex justify-end text-right text-white font-light"
             >
               Forgot Password?
             </Button>
-            <Button className="cursor-pointer bg-white text-[3e7c1f] hover:bg-transparent hover:text-white border border-white">
+            <Button
+              onClick={Login}
+              className="cursor-pointer bg-white text-[#3e7c1f] hover:bg-transparent hover:text-white border border-white"
+            >
               Login
             </Button>
             <div className="w-full h-full border-t border-white flex py-6 mt-[7%]">
@@ -89,8 +105,9 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <p className="text-white flex justify-center items-center absolute bottom-10">eTCMF | 2025</p>
-
+      <p className="text-white flex justify-center items-center absolute bottom-10">
+        eTCMF | 2025
+      </p>
     </div>
   );
 }

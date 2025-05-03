@@ -2,7 +2,6 @@ import Image from "next/image";
 import Lines from "@/images/abstract.png";
 import Lines2 from "@/images/abstract_top.png";
 import Footer from "@/images/login_footer.png";
-import RTALogo from "@/images/rta-logo.png";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

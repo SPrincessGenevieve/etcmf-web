@@ -36,7 +36,7 @@ export default function OTPScan() {
   };
 
   const NavigateToDashboard = () => {
-    router.push("/etcmf");
+    router.push("/etcmf/dashboard");
   };
 
   const index = [0, 1, 2, 3, 4, 5];

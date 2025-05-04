@@ -78,6 +78,10 @@
   --foreground: oklch(0.145 0 0);
 }
 
+[data-collapsed="true"] .sidebar-label {
+  display: none;
+}
+
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);

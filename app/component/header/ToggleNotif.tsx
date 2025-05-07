@@ -18,7 +18,7 @@ import { NotificationMockdata } from "@/lib/mock-data/notification_mockdata";
 
 export default function ToggleNotif() {
   return (
-    <Tabs defaultValue="all" className="w-[400px]">
+    <Tabs defaultValue="all" className="w-auto max-w-[400px]">
       <TabsList className="w-full flex">
         <TabsTrigger value="all" className="w-auto">
           All

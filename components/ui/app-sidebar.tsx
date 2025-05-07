@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import {
   Archive,
@@ -36,12 +37,12 @@ const items = [
 ];
 
 export function AppSidebar() {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const pathname = usePathname();
 
   return (
     <div
-      className={`pt-4 transition-all duration-300  ${
+      className={`absolute z-[9999] pt-4 transition-all duration-300  ${
         collapsed ? "w-16" : "w-90"
       } h-screen bg-[#0B6540] border-r`}
     >

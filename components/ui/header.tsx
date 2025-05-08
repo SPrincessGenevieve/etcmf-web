@@ -15,11 +15,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 
 export default function Header() {
   return (
-    <div className="w-full h-[60px] absolute top-0 flex justify-between items-center px-4 cont-header bg-white">
-      <p className="font-bold municipality text-[12px]">
+    <div className="pl-2 w-full h-auto flex justify-between items-center pr-2 py-2 cont-header ">
+      <p className="font-bold municipality text-[12px] w-full max-w-[200px]">
         MANOLO FORTICH MUNICIPALITY
       </p>
-      <div className="flex gap-8 justify-center items-center avatar-cont">
+      <div className="w-full flex gap-8 justify-end items-center avatar-cont">
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <div className="flex gap-2 items-center">

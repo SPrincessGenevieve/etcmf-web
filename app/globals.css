@@ -124,7 +124,6 @@
     @apply bg-background text-foreground;
   }
 }
-
 @media (max-width: 434px) {
   .login_container_2 {
     max-width: 100%;
@@ -156,16 +155,40 @@
     text-align: left;
     align-items: start;
     margin-top: 2%;
-
   }
   .avatar-cont {
     justify-content: end;
     width: 100%;
   }
-  .municipality{
+  .municipality {
     display: none;
   }
-  .greetings-name{
+  .greetings-name {
     display: contents;
+  }
+}
+
+@media (max-width: 520px) {
+  .municipality {
+    display: none;
+  }
+}
+@media (max-width: 500px){
+  .sidebar_width{
+    width: 400vh;
+  }
+}
+
+@media(max-width: 1415px){
+  .filter_cont{
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    
+  }
+  .range_cont{
+    width: 100%;
+    max-width: 100%;
   }
 }

@@ -42,11 +42,30 @@ export const columns: ColumnDef<Records>[] = [
       const level = row.original.level; // e.g. "1st offense"
       const levelNumber = parseInt(level) || 1;
       const progress = (levelNumber / 4) * 100; // 4 is max offense level
+      const status = row.original.status;
 
       return (
         <div className="flex flex-col gap-1">
           <div className="w-[50%]">
-            <Progress value={progress} className="h-2" />
+            <Progress
+              color={`${
+                status === "pending"
+                  ? "bg-[#FFD68F]"
+                  : status === "resolved"
+                  ? "bg-[#95F2AC]"
+                  : status === "overdue"
+                  ? "bg-[#FF8A8A]"
+                  : status === "dropped"
+                  ? "bg-[#FF9500]"
+                  : status === "raised"
+                  ? "bg-[#F37ACA]"
+                  : status === "community service"
+                  ? "bg-[#98BDF7]"
+                  : ""
+              }`}
+              value={progress}
+              className="h-2"
+            />
           </div>
           <span>{level}</span>
         </div>
@@ -91,15 +110,15 @@ export const columns: ColumnDef<Records>[] = [
           <div
             className={`h-2 w-2 ${
               status === "pending"
-                ? "bg-[#008CFF]"
+                ? "bg-[#FFD68F]"
                 : status === "resolved"
-                ? "bg-[#3DBB69]"
+                ? "bg-[#95F2AC]"
                 : status === "overdue"
-                ? "bg-[#DF0004]"
+                ? "bg-[#FF8A8A]"
                 : status === "raised"
-                ? "bg-[#DF00B6]"
+                ? "bg-[#F37ACA]"
                 : status === "community service"
-                ? "bg-[#1A00FF]"
+                ? "bg-[#98BDF7]"
                 : status === "dropped"
                 ? "bg-[#FF9500]"
                 : ""

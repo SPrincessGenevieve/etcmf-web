@@ -13,12 +13,11 @@ export default function Table() {
       const result: Records[] = reportData;
       setData(result);
     }
-
     fetchData();
   }, []);
 
   return (
-    <div className=" w-full  bg-white">
+    <div className=" w-full  bg-white rounded-2xl border">
       <DataTable columns={columns} data={data} />
       <div className="flex justify-between p-2 text-[12px] text-gray-500">
         <p>TICKET COUNT: 10 out 11402 entries</p>

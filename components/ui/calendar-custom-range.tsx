@@ -34,11 +34,11 @@ export default function CalendarCustomRange() {
             showOutsideDays
             classNames={{
               months:
-                "flex gap-8 p-2 w-full flex-col justify-center items-center  text-[12px]",
-              selected: "text-[#2a492a]",
-              range_start:"bg-[#d3f3d3] rounded-l-xl font-bold text-[12px]",
-              range_end: "bg-[#d3f3d3] rounded-r-xl font-bold text-[12px]",
-              range_middle:"bg-[#d3f3d3] font-bold text-[12px]",
+                "transition ease-in-ease-out flex gap-8 p-2 w-full flex-col justify-center items-center  text-[12px]",
+              selected: "transition ease-in-ease-out text-[#2a492a]",
+              range_start:"transition ease-in-ease-out bg-[#d3f3d3] rounded-l-xl font-bold text-[12px]",
+              range_end: "transition ease-in-ease-out bg-[#d3f3d3] rounded-r-xl font-bold text-[12px]",
+              range_middle:"transition ease-in-ease-out bg-[#d3f3d3] font-bold text-[12px]",
             }}
           />
         </DropdownMenuContent>

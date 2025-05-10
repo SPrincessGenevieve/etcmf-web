@@ -1,15 +1,18 @@
 "use client";
+import ViewMore from "@/app/component/records/ViewMore";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Progress } from "@/components/ui/progress";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
+import { useState } from "react";
+import { DialogTitle } from "@radix-ui/react-dialog";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -25,6 +28,85 @@ export type Records = {
   time_stamp: string;
   status: string;
 };
+function ActionsCell({ row }: { row: any }) {
+  const [viewMore, setViewMore] = useState(false);
+  const [settleDispute, setSettleDispute] = useState(false);
+  const [updateStatus, setUpdateStatus] = useState(false);
+
+  const ticketNum = row.original.ticket_no;
+  const fullName = row.original.offender;
+  const bday = "12/12/27";
+  const sex = "Male";
+  const driversLicenseNum = row.original.license_no;
+  const address = "Lapasan A4, Cagayan de Oro City";
+  const violation = row.original.violation_title;
+  const fine = row.original.fines;
+  const level = row.original.level;
+  const date = row.original.time_stamp;
+  const time = "12:23 PM";
+  const email = "example@gmail.com";
+  const status = row.original.status;
+  const location = row.original.location;
+  const officer = row.original.officer;
+
+  const handleOpen = () => {
+    setViewMore(true);
+  };
+
+  return (
+    <div>
+      <Dialog open={viewMore} onOpenChange={setViewMore}>
+        <DialogContent className="flex flex-col max-w-[90%] md:max-w-[700px] lg:max-w-[1000px] max-h-[90%] overflow-y-auto">
+          <DialogTitle className="font-bold">DETAIL INFORMATION</DialogTitle>
+          <ViewMore
+            ticketNum={ticketNum}
+            fullName={fullName}
+            bday={bday}
+            sex={sex}
+            driversLicenseNum={driversLicenseNum}
+            address={address}
+            violation={violation}
+            fine={fine.toString()}
+            level={level}
+            date={date}
+            time={time}
+            status={status}
+            location={location}
+            officer={officer}
+            email={email}
+          />
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={settleDispute}>
+        <DialogContent>
+          <DialogTitle className="font-bold">SETTLE DISPUTE</DialogTitle>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={updateStatus}>
+        <DialogContent>
+          <DialogTitle className="font-bold">UPDATE STATUS</DialogTitle>
+        </DialogContent>
+      </Dialog>
+
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <div>
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal className="h-4 w-4" />
+          </div>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuItem onClick={handleOpen}>View More</DropdownMenuItem>
+          <DropdownMenuItem>Settle Dispute</DropdownMenuItem>
+          <DropdownMenuItem>Update Status</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
+  );
+}
 
 export const columns: ColumnDef<Records>[] = [
   {
@@ -145,30 +227,6 @@ export const columns: ColumnDef<Records>[] = [
 
   {
     id: "actions",
-    cell: ({ row }) => {
-      const payment = row.original;
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <div>
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </div>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.ticket_no)}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
+    cell: ({ row }) => <ActionsCell row={row} />,
   },
 ];

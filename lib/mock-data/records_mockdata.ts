@@ -242,7 +242,7 @@ export const reportData = [
   {
     ticket_no: "TCK-1061",
     violation_title: "Counterflowing",
-    level: "Major",
+    level: "4th Offense",
     license_no: "X50-65-735656",
     fines: 2500,
     status: "dropped",
@@ -266,7 +266,7 @@ export const reportData = [
   {
     ticket_no: "TCK-1063",
     violation_title: "Colorum",
-    level: "Major",
+    level: "4th Offense",
     license_no: "V25-48-631756",
     fines: 1500,
     status: "resolved",
@@ -290,7 +290,7 @@ export const reportData = [
   {
     ticket_no: "TCK-1065",
     violation_title: "Illegal Parking",
-    level: "Minor",
+    level: "1st Offense",
     license_no: "Z84-87-786508",
     fines: 1500,
     status: "pending",
@@ -326,7 +326,7 @@ export const reportData = [
   {
     ticket_no: "TCK-1068",
     violation_title: "Reckless Driving",
-    level: "Minor",
+    level: "1st Offense",
     license_no: "P61-41-254739",
     fines: 500,
     status: "dropped",
@@ -350,7 +350,7 @@ export const reportData = [
   {
     ticket_no: "TCK-1070",
     violation_title: "Counterflowing",
-    level: "Minor",
+    level: "1st Offense",
     license_no: "F70-67-371782",
     fines: 1000,
     status: "resolved",
@@ -434,7 +434,7 @@ export const reportData = [
   {
     ticket_no: "TCK-1077",
     violation_title: "Counterflowing",
-    level: "Major",
+    level: "4th Offense",
     license_no: "C70-12-885408",
     fines: 2500,
     status: "dropped",
@@ -458,7 +458,7 @@ export const reportData = [
   {
     ticket_no: "TCK-1079",
     violation_title: "Counterflowing",
-    level: "Major",
+    level: "4th Offense",
     license_no: "Y57-31-735324",
     fines: 2500,
     status: "resolved",
@@ -470,7 +470,7 @@ export const reportData = [
   {
     ticket_no: "TCK-1080",
     violation_title: "Overspeeding",
-    level: "Major",
+    level: "4th Offense",
     license_no: "S96-58-515922",
     fines: 1000,
     status: "dropped",
@@ -494,7 +494,7 @@ export const reportData = [
   {
     ticket_no: "TCK-1082",
     violation_title: "Counterflowing",
-    level: "Minor",
+    level: "1st Offense",
     license_no: "D65-56-766459",
     fines: 2000,
     status: "resolved",
@@ -506,7 +506,7 @@ export const reportData = [
   {
     ticket_no: "TCK-1083",
     violation_title: "No Helmet",
-    level: "Minor",
+    level: "1st Offense",
     license_no: "O65-85-381433",
     fines: 1500,
     status: "overdue",
@@ -518,7 +518,7 @@ export const reportData = [
   {
     ticket_no: "TCK-1084",
     violation_title: "Counterflowing",
-    level: "Minor",
+    level: "1st Offense",
     license_no: "K13-73-992288",
     fines: 1500,
     status: "overdue",
@@ -530,7 +530,7 @@ export const reportData = [
   {
     ticket_no: "TCK-1085",
     violation_title: "Colorum",
-    level: "Major",
+    level: "4th Offense",
     license_no: "R11-76-300337",
     fines: 500,
     status: "overdue",
@@ -542,7 +542,7 @@ export const reportData = [
   {
     ticket_no: "TCK-1086",
     violation_title: "Reckless Driving",
-    level: "Minor",
+    level: "1st Offense",
     license_no: "O12-21-408528",
     fines: 1000,
     status: "pending",
@@ -554,7 +554,7 @@ export const reportData = [
   {
     ticket_no: "TCK-1087",
     violation_title: "Colorum",
-    level: "Major",
+    level: "4th Offense",
     license_no: "N80-52-468900",
     fines: 2000,
     status: "raised",
@@ -578,7 +578,7 @@ export const reportData = [
   {
     ticket_no: "TCK-1089",
     violation_title: "Colorum",
-    level: "Major",
+    level: "4th Offense",
     license_no: "D34-47-338533",
     fines: 1500,
     status: "overdue",

@@ -5,6 +5,8 @@ import { AppSidebar } from "@/components/ui/app-sidebar";
 import Header from "@/components/ui/header";
 import { useUserContext } from "../context/UserContext";
 import { useEffect, useState } from "react";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 export default function DashboardLayout({
   children,
@@ -37,7 +39,9 @@ export default function DashboardLayout({
           </div>
           {/*  */}
           <div className={`p-2 w-full h-full overflow-y-auto bg-[#F6F6F6]`}>
-            {children}
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              {children}
+            </LocalizationProvider>
           </div>
         </div>
       </div>

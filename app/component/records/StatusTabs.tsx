@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "../../../components/ui/button";
 import Table from "./DataTable";
 import DateTabs from "./DateTabs";
-import RangeCalendar from "@/components/ui/range-calendar";
+import RangeCalendar from "@/components/ui/calendar-custom-range";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 

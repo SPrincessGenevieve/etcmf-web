@@ -1,14 +1,35 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../../../components/ui/button";
 import Table from "./DataTable";
 import DateTabs from "./DateTabs";
 import RangeCalendar from "@/components/ui/calendar-custom-range";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
+import { reportData } from "@/lib/mock-data/records_mockdata";
 
 export default function StatusTabs() {
   const [activeTab, setActiveTab] = useState("All Violations");
+  const status = reportData.map((item) => item.status);
+
+  const resolvedCount = reportData.filter(
+    (item) => item.status === "resolved"
+  ).length;
+  const overdueCount = reportData.filter(
+    (item) => item.status === "overdue"
+  ).length;
+  const raisedCount = reportData.filter(
+    (item) => item.status === "raised"
+  ).length;
+  const pendingCount = reportData.filter(
+    (item) => item.status === "pending"
+  ).length;
+  const droppedCount = reportData.filter(
+    (item) => item.status === "dropped"
+  ).length;
+  const communityCount = reportData.filter(
+    (item) => item.status === "community service"
+  ).length;
 
   return (
     <div className="w-full ">
@@ -90,7 +111,19 @@ export default function StatusTabs() {
                         : ""
                     } `}
                   >
-                    350
+                    {tab === "Pending"
+                      ? pendingCount
+                      : tab === "Resolved"
+                      ? resolvedCount
+                      : tab === "Overdue"
+                      ? overdueCount
+                      : tab === "Dropped"
+                      ? droppedCount
+                      : tab === "Raised"
+                      ? raisedCount
+                      : tab === "Community Service"
+                      ? communityCount
+                      : status.length}
                   </p>
                 </div>
               </div>

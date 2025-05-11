@@ -13,6 +13,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 import { useState } from "react";
 import { DialogTitle } from "@radix-ui/react-dialog";
+import UpdateStatus from "@/app/component/records/UpdateStatus";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -49,8 +50,16 @@ function ActionsCell({ row }: { row: any }) {
   const location = row.original.location;
   const officer = row.original.officer;
 
-  const handleOpen = () => {
+  const handleOpenViewMore = () => {
     setViewMore(true);
+  };
+
+  const handleSettleDispute = () => {
+    setSettleDispute(true);
+  };
+
+  const handleUpdateStatus = () => {
+    setUpdateStatus(true);
   };
 
   return (
@@ -78,15 +87,10 @@ function ActionsCell({ row }: { row: any }) {
         </DialogContent>
       </Dialog>
 
-      <Dialog open={settleDispute}>
-        <DialogContent>
-          <DialogTitle className="font-bold">SETTLE DISPUTE</DialogTitle>
-        </DialogContent>
-      </Dialog>
-
-      <Dialog open={updateStatus}>
-        <DialogContent>
+      <Dialog open={updateStatus} onOpenChange={setUpdateStatus}>
+        <DialogContent className="overflow-y-auto">
           <DialogTitle className="font-bold">UPDATE STATUS</DialogTitle>
+          <UpdateStatus ticketNum={ticketNum} status={status}></UpdateStatus>
         </DialogContent>
       </Dialog>
 
@@ -99,9 +103,12 @@ function ActionsCell({ row }: { row: any }) {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem onClick={handleOpen}>View More</DropdownMenuItem>
-          <DropdownMenuItem>Settle Dispute</DropdownMenuItem>
-          <DropdownMenuItem>Update Status</DropdownMenuItem>
+          <DropdownMenuItem onClick={handleOpenViewMore}>
+            View More
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={handleUpdateStatus}>
+            Update Status
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

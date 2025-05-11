@@ -121,14 +121,39 @@ export default function StatusTabs() {
       <div className="mt-4 text-[12px] w-full h-full ">
         {activeTab === "All Violations" && (
           <div className="w-full h-full ">
-            <Table></Table>
+            <Table filterStatus={activeTab} />
           </div>
         )}
-        {activeTab === "Pending" && <p>Pending content.</p>}
-        {activeTab === "Resolved" && <p>Resolved content.</p>}
-        {activeTab === "Overdue" && <p>Overdue content.</p>}
-        {activeTab === "Raised" && <p>Raised content.</p>}
-        {activeTab === "Community Service" && <p>Community service content.</p>}
+        {activeTab === "Pending" && (
+          <div className="w-full h-full ">
+            <Table filterStatus={activeTab} />
+          </div>
+        )}
+        {activeTab === "Resolved" && (
+          <div className="w-full h-full ">
+            <Table filterStatus={activeTab} />
+          </div>
+        )}
+        {activeTab === "Overdue" && (
+          <div className="w-full h-full ">
+            <Table filterStatus={activeTab} />
+          </div>
+        )}
+        {activeTab === "Raised" && (
+          <div className="w-full h-full ">
+            <Table filterStatus={activeTab} />
+          </div>
+        )}
+        {activeTab === "Dropped" && (
+          <div className="w-full h-full ">
+            <Table filterStatus={activeTab} />
+          </div>
+        )}
+        {activeTab === "Community Service" && (
+          <div className="w-full h-full ">
+            <Table filterStatus={activeTab} />
+          </div>
+        )}
       </div>
     </div>
   );

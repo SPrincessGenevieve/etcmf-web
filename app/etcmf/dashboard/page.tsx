@@ -3,7 +3,7 @@
 'use client'
 
 import React from "react";
-import { ChartNoAxesColumnDecreasing, Sun } from "lucide-react";
+import { ChartNoAxesColumn, ChartNoAxesColumnDecreasing, ChartPie, MapPinned, PhilippinePeso, Sun } from "lucide-react";
 import { TrendingUp } from "lucide-react";
 import { RadialBar, RadialBarChart } from "recharts";
 
@@ -12,36 +12,14 @@ import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } f
 import { TicketsPlane } from 'lucide-react';
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
 import Overdue from "../overdue/page";
-import RadialChart from "@/components/ui/dashboard/radial_chart";
-import Areachart from "@/components/ui/dashboard/area_chart";
+import RadialChart from "@/app/component/dashboard/radial_chart";
+import Areachart from "@/app/component/dashboard/area_chart";
+import CommitChart from "@/app/component/dashboard/CommitChart ";
+import Barchart from "@/app/component/dashboard/bar_chart";
+import Mapchart from "@/app/component/dashboard/map_chart";
+import Piechart from "@/app/component/dashboard/pie_chart";
 
-const distribution = [
-  { month: "January", Pending: 200, Done: 180, Dispute: 60, Overdue: 35 },
-  { month: "February", Pending: 205, Done: 100, Dispute: 70, Overdue: 10 },
-  { month: "March", Pending: 237, Done: 120, Dispute: 65, Overdue: 28 },
-  { month: "April", Pending: 73, Done: 190, Dispute: 55, Overdue: 35 },
-  { month: "May", Pending: 209, Done: 130, Dispute: 60, Overdue: 52 },
 
-]
-
-const distributionConfig = {
-  Pending: {
-    label: "Pending",
-    color: " #FFAAAA",
-  },
-  Done: {
-    label: "Done",
-    color: "#3DBB69",
-  },
-  Dispute: {
-    label: "Dispute",
-    color: "#FFAA00",
-  },
-  Overdue: {
-    label: "Overdue",
-    color: "#FF0000",
-  },
-} satisfies   ChartConfig
 
 const chartConfig = {
   drivers: {
@@ -137,23 +115,23 @@ export default function Dashboard() {
             </div>
           </CardHeader>
           <CardContent>
-
+            <CommitChart />
           </CardContent>
         </Card>
       </div>
 
-      <div className="col-span-2">
+      <div className="col-span-2 ">
         <Card>
           <CardHeader>
             <div className="flex item-center gap-3">
               <div>
-                <TrendingUp />
+                <ChartNoAxesColumn />
               </div>
-              <p className="font-bold">Ticket Status</p>
+              <p className="font-bold">Top Related Violations</p>
             </div>
           </CardHeader>
           <CardContent>
-            <Overdue />
+            <Barchart />
           </CardContent>
         </Card>
       </div>
@@ -163,14 +141,15 @@ export default function Dashboard() {
           <CardHeader>
             <div className="flex item-center gap-3">
               <div>
-                <TrendingUp />
+                <MapPinned />
               </div>
-              <p className="font-bold">Ticket Status</p>
+              <p className="font-bold">High Violation Area</p>
             </div>
           </CardHeader>
-          <CardContent>
-            <Overdue />
+          <CardContent  >
+            <Mapchart />
           </CardContent>
+
         </Card>
       </div>
 
@@ -185,13 +164,13 @@ export default function Dashboard() {
           <CardHeader>
             <div className="flex item-center gap-3">
               <div>
-                <Sun />
+                <ChartPie />
               </div>
-              <p className="font-bold">Daily Violation</p>
+              <p className="font-bold">Violations Today</p>
             </div>
           </CardHeader>
           <CardContent>
-            <p>Heat Map Here!</p>
+            <Piechart />
           </CardContent>
         </Card>
       </div>
@@ -201,13 +180,13 @@ export default function Dashboard() {
           <CardHeader>
             <div className="flex item-center gap-3">
               <div>
-                <TrendingUp />
+                <PhilippinePeso />
               </div>
-              <p className="font-bold">Ticket Status</p>
+              <p className="font-bold">Revenue of Fines</p>
             </div>
           </CardHeader>
           <CardContent>
-            <Overdue />
+            <p>Coming Soon!</p>
           </CardContent>
         </Card>
       </div>

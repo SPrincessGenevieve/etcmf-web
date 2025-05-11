@@ -65,7 +65,6 @@ const CommitChart: React.FC = () => {
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-4">Violation Heatmap</h2>
 
       <div className="flex flex-col">
         {/* Month Labels */}

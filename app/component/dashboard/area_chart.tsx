@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { TicketsPlane } from 'lucide-react';
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
-import RadialChart from "@/components/ui/dashboard/radial_chart";
+import RadialChart from "@/app/component/dashboard/radial_chart";
 
 const distribution = [
     { month: "January", Pending: 200, Done: 180, Dispute: 60, Overdue: 35 },
@@ -44,7 +44,7 @@ Overdue: {
 
 export default function Areachart() {
     return (
-        <div className="md:col-span-3">
+        <div >
         <Card className="md:h-[265px]">
           <CardHeader>
             <div className="flex item-center gap-3">

@@ -7,7 +7,7 @@ import { useUserContext } from "../context/UserContext";
 import { useEffect, useState } from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { AppSidebar } from "@/components/ui/app_sidebar";
+import { AppSidebar } from "@/app/component/dashboard/app_sidebar";
 
 export default function DashboardLayout({
   children,

@@ -13,14 +13,7 @@ import { TicketsPlane } from 'lucide-react';
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
 import Overdue from "../overdue/page";
 import RadialChart from "@/components/ui/dashboard/radial_chart";
-
-
-const chartData = [
-  { ticket: "Total Tickets", drivers: 275, fill: "#08442B" },
-  { ticket: "Pending Tickets", drivers: 200, fill: "#13905D" },
-  { ticket: "Dispute Tickets", drivers: 187, fill: "#3DBB69" },
-  { ticket: "Pending Tickets", drivers: 173, fill: "#64EC94" },
-]
+import Areachart from "@/components/ui/dashboard/area_chart";
 
 const distribution = [
   { month: "January", Pending: 200, Done: 180, Dispute: 60, Overdue: 35 },
@@ -125,87 +118,65 @@ export default function Dashboard() {
       </div>
 
       <div className="md:col-span-3">
-        <Card className="h-[260px]">
-          <CardHeader>
-            <div className="flex item-center gap-3">
-              <div>
-                <TicketsPlane />
-              </div>
-              <p className="font-bold">Ticket Distribution</p>
-            </div>
-          </CardHeader>
-          <CardContent>
-          <ChartContainer  config={distributionConfig} className="m-0 p-0 h-[170px] w-full">
-          <AreaChart
-            accessibilityLayer
-            data={distribution}
-            margin={{
-              left: 12,
-              right: 12,
-            }}
-            
-          >
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="month"
-              tickLine={false}
-              axisLine={false}
-              tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 3)}
-            />
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent indicator="dot" />}
-            />
-            <Area
-              dataKey="Done"
-              type="natural"
-              fill="var(--color-Done)"
-              fillOpacity={0.4}
-              stroke="var(--color-Done)"
-              stackId="a"
-            />
-            <Area
-              dataKey="Pending"
-              type="natural"
-              fill="var(--color-Pending)"
-              fillOpacity={0.4}
-              stroke="var(--color-Pending)"
-              stackId="a"
-            />
-
-            <Area
-              dataKey="Dispute"
-              type="natural"
-              fill="var(--color-Dispute)"
-              fillOpacity={0.4}
-              stroke="var(--color-Dispute)"
-              stackId="a"
-            />
-
-            <Area
-              dataKey="Overdue"
-              type="natural"
-              fill="var(--color-Overdue)"
-              fillOpacity={0.4}
-              stroke="var(--color-Overdue)"
-              stackId="a"
-            />
-            
-          </AreaChart>
-          </ChartContainer>
-
-
-          </CardContent>
-          <CardFooter>
-            
-            </CardFooter>
-
-        </Card>
+        <Areachart />
       </div>
     </div>
   </div>
 
+  <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+    <div className="grid gap-4 md:grid-cols-4">
+
+      <div className="col-span-1">
+        <Card>
+          <CardHeader>
+            <div className="flex item-center gap-3">
+              <div>
+                <Sun />
+              </div>
+              <p className="font-bold">Daily Violation</p>
+            </div>
+          </CardHeader>
+          <CardContent>
+
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="col-span-2">
+        <Card>
+          <CardHeader>
+            <div className="flex item-center gap-3">
+              <div>
+                <TrendingUp />
+              </div>
+              <p className="font-bold">Ticket Status</p>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <Overdue />
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="col-span-1">
+        <Card>
+          <CardHeader>
+            <div className="flex item-center gap-3">
+              <div>
+                <TrendingUp />
+              </div>
+              <p className="font-bold">Ticket Status</p>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <Overdue />
+          </CardContent>
+        </Card>
+      </div>
+
+    </div>
+
+  </div>
   <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
     <div className="grid gap-4 md:grid-cols-4">
 
@@ -259,7 +230,7 @@ export default function Dashboard() {
 
     </div>
 
-  </div>
+  </div>  
 
 </div>
   );

@@ -9,11 +9,11 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown_menu";
 import { Bell, ChevronDown, CircleAlert, LogOut, Settings } from "lucide-react";
 import ToggleNotif from "../component/header/ToggleNotif";
 import { SidebarProvider } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/ui/app-sidebar";
+import { AppSidebar } from "@/components/ui/app_sidebar";
 
 export default function DashboardLayout({
   children,

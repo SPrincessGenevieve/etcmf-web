@@ -8,7 +8,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown_menu";
 import { Bell, ChevronDown, CircleAlert, LogOut, Settings } from "lucide-react";
 import ToggleNotif from "@/app/component/header/ToggleNotif";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";

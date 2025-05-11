@@ -13,7 +13,7 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown_menu";
 import { NotificationMockdata } from "@/lib/mock-data/notification_mockdata";
 
 export default function ToggleNotif() {

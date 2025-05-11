@@ -204,3 +204,19 @@
     flex-direction: column;
   }
 }
+
+@media (max-width: 1000px) {
+  .setting_text {
+    display: none;
+  }
+
+  .setting_l2, .setting_l1{
+    padding: 0;
+  }
+
+  .setting_back{
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+}

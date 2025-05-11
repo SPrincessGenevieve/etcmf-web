@@ -12,13 +12,29 @@ import {
 import { Bell, ChevronDown, CircleAlert, LogOut, Settings } from "lucide-react";
 import ToggleNotif from "@/app/component/header/ToggleNotif";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import MunicipalIcon from "@/images/rta-logo.png";
 
 export default function Header() {
+  const router = useRouter();
+
+  const navigateSettings = () => {
+    router.push("/etcmf/settings");
+  };
+
   return (
     <div className="pl-2 w-full h-auto flex justify-between items-center pr-2 py-2 cont-header ">
-      <p className="font-bold municipality text-[12px] w-full max-w-[200px]">
-        MANOLO FORTICH MUNICIPALITY
-      </p>
+      <div className="flex gap-2 w-full items-center">
+        <Image
+          className="w-[40] h-[40] rounded-full"
+          src={MunicipalIcon}
+          alt=""
+        ></Image>
+        <p className="font-bold municipality text-[12px] w-full max-w-[200px]">
+          MANOLO FORTICH MUNICIPALITY
+        </p>
+      </div>
       <div className="w-full flex gap-8 justify-end items-center avatar-cont">
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
@@ -79,7 +95,10 @@ export default function Header() {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
-                <DropdownMenuItem className="flex gap-2 ">
+                <DropdownMenuItem
+                  onClick={navigateSettings}
+                  className="flex gap-2 "
+                >
                   <div className="">
                     <Settings></Settings>
                   </div>

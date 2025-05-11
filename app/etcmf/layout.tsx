@@ -26,7 +26,7 @@ export default function DashboardLayout({
 
   return (
     <SidebarProvider className="relative bg-[#F6F6F6] flex">
-      <div className="flex overflow-hidden w-full">
+      <div className="flex overflow-hidden w-full bg-[#F6F6F6]">
         <div className="flex h-full overflow-hidden">
           <AppSidebar></AppSidebar>
         </div>

@@ -15,62 +15,6 @@ import Overdue from "../overdue/page";
 import RadialChart from "@/components/ui/dashboard/radial_chart";
 import Areachart from "@/components/ui/dashboard/area_chart";
 
-const distribution = [
-  { month: "January", Pending: 200, Done: 180, Dispute: 60, Overdue: 35 },
-  { month: "February", Pending: 205, Done: 100, Dispute: 70, Overdue: 10 },
-  { month: "March", Pending: 237, Done: 120, Dispute: 65, Overdue: 28 },
-  { month: "April", Pending: 73, Done: 190, Dispute: 55, Overdue: 35 },
-  { month: "May", Pending: 209, Done: 130, Dispute: 60, Overdue: 52 },
-
-]
-
-const distributionConfig = {
-  Pending: {
-    label: "Pending",
-    color: " #FFAAAA",
-  },
-  Done: {
-    label: "Done",
-    color: "#3DBB69",
-  },
-  Dispute: {
-    label: "Dispute",
-    color: "#FFAA00",
-  },
-  Overdue: {
-    label: "Overdue",
-    color: "#FF0000",
-  },
-} satisfies   ChartConfig
-
-const chartConfig = {
-  drivers: {
-    label: "Tickets",
-  },
-  chrome: {
-    label: "Chrome",
-    color: "hsl(var(--chart-1))",
-  },
-  safari: {
-    label: "Safari",
-    color: "hsl(var(--chart-2))",
-  },
-  firefox: {
-    label: "Firefox",
-    color: "hsl(var(--chart-3))",
-  },
-  edge: {
-    label: "Edge",
-    color: "hsl(var(--chart-4))",
-  },
-  other: {
-    label: "Other",
-    color: "hsl(var(--chart-5))",
-  },
-} satisfies ChartConfig
-
-
-
 const barChartData = [
   { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
   { browser: "safari", visitors: 200, fill: "var(--color-safari)" },

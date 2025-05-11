@@ -10,7 +10,21 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript", "prettier"),
+  ...compat.config({
+    extends: ["next"],
+    rules: {
+      // Disable Next.js and React strict rules
+      "react/no-unescaped-entities": "off",
+      "@next/next/no-page-custom-font": "off",
+      
+      // Turn off strict mode rules
+      "strict": "off", // disables 'use strict'
+      "@typescript-eslint/strict-boolean-expressions": "off", // if using TypeScript
+      "no-console": "off", // allow console.log
+      "no-debugger": "off", // allow debugger
+    },
+  }),
 ];
+
 
 export default eslintConfig;

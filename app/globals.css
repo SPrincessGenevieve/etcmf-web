@@ -124,10 +124,99 @@
     @apply bg-background text-foreground;
   }
 }
-
 @media (max-width: 434px) {
-  .login_container_2{
+  .login_container_2 {
     max-width: 100%;
     max-height: 100%;
+  }
+}
+
+@media (max-width: 413px) {
+  .notif-cont {
+    max-width: 85%;
+  }
+}
+
+@media (max-width: 350px) {
+  .notif-cont {
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 625px) {
+  .greetings-name {
+    display: none;
+  }
+}
+
+@media (max-width: 415px) {
+  .text-size {
+    font-size: 10px;
+  }
+
+  .cont-header {
+    flex-direction: column-reverse;
+    text-align: left;
+    align-items: start;
+    margin-top: 2%;
+  }
+  .avatar-cont {
+    justify-content: end;
+    width: 100%;
+  }
+  .municipality {
+    display: none;
+  }
+  .greetings-name {
+    display: contents;
+  }
+}
+
+@media (max-width: 520px) {
+  .municipality {
+    display: none;
+  }
+}
+@media (max-width: 500px) {
+  .sidebar_width {
+    width: 400vh;
+  }
+}
+
+@media (max-width: 1415px) {
+  .filter_cont {
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .range_cont {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 800px) {
+  .driver-cont {
+    flex-direction: column-reverse;
+  }
+  .driver-detail {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 1000px) {
+  .setting_text {
+    display: none;
+  }
+
+  .setting_l2, .setting_l1{
+    padding: 0;
+  }
+
+  .setting_back{
+    padding: 0;
+    display: flex;
+    justify-content: center;
   }
 }

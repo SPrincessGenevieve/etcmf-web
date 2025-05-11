@@ -1,4 +1,5 @@
-import { useState } from "react";
+"use client";
+import { useEffect, useState } from "react";
 import {
   Archive,
   ArchiveX,
@@ -20,6 +21,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import OfficerIcon from "@/images/officer_icon.svg";
 import Image from "next/image";
+import { useUserContext } from "@/app/context/UserContext";
 
 const items = [
   { title: "Dashboard", url: "/etcmf/dashboard", icon: LayoutDashboard },
@@ -36,14 +38,29 @@ const items = [
 ];
 
 export function AppSidebar() {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const pathname = usePathname();
+  const { setUserDetails, isOpen } = useUserContext();
 
+  const handleCollapse = () => {
+    const newCollapsed = !collapsed;
+    setCollapsed(newCollapsed);
+  };
+
+  useEffect(() => {
+    setUserDetails({
+      isOpen: collapsed,
+    });
+  }, [isOpen, collapsed]);
+
+  useEffect(() =>{
+    console.log("OPEN", isOpen)
+  })
   return (
     <div
-      className={`pt-4 transition-all duration-300  ${
-        collapsed ? "w-16" : "w-90"
-      } h-screen bg-[#0B6540] border-r`}
+      className={`h-full pt-4 transition-all duration-300 ${
+        collapsed ? "w-16" : "w-90 sidebar_width"
+      } bg-[#0B6540] border-r`}
     >
       <div
         className={`flex w-full justify-between ${
@@ -64,7 +81,7 @@ export function AppSidebar() {
         <div className="pl-2 flex justify-start cursor-pointer w-auto items-center p-1">
           <div
             className="group text-white flex items-center gap-2 p-2 transition ease-in-out hover:bg-[#ffffff54] rounded"
-            onClick={() => setCollapsed(!collapsed)}
+            onClick={handleCollapse}
           >
             <PanelRightDashed className="w-full h-full stroke-white" />
           </div>

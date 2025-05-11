@@ -36,7 +36,6 @@ export default function Table({ filterStatus }: TableProps) {
         <p>
           TICKET COUNT: {data.length} out of {reportData.length} entries
         </p>
-        <p>PAGE 1</p>
       </div>
     </div>
   );

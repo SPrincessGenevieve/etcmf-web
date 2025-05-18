@@ -173,6 +173,9 @@
   .municipality {
     display: none;
   }
+    .municipality_cont{
+    display: none;
+  }
   .greetings-name {
     display: contents;
   }
@@ -180,6 +183,9 @@
 
 @media (max-width: 520px) {
   .municipality {
+    display: none;
+  }
+  .municipality_cont{
     display: none;
   }
 }

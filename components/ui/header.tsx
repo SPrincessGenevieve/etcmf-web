@@ -15,6 +15,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import MunicipalIcon from "@/images/rta-logo.png";
+import "@/app/globals.css"
 
 export default function Header() {
   const router = useRouter();
@@ -25,7 +26,7 @@ export default function Header() {
 
   return (
     <div className="pl-2 w-full h-auto flex justify-between items-center pr-2 py-2 cont-header ">
-      <div className="flex gap-2 w-full items-center">
+      <div className="flex gap-2 w-full items-center municipality_cont">
         <Image
           className="w-[40] h-[40] rounded-full"
           src={MunicipalIcon}

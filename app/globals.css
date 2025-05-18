@@ -143,6 +143,12 @@
   }
 }
 
+@media (max-width: 390px) {
+  .week-cont {
+    display: none;
+  }
+}
+
 @media (max-width: 625px) {
   .greetings-name {
     display: none;
@@ -219,4 +225,32 @@
     display: flex;
     justify-content: center;
   }
+}
+
+
+@media (max-width: 1200px) {
+  .violation_today{
+    /* bottom: 40px; */
+  }
+}
+
+@media (max-width: 1055px) {
+  .chart_group{
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+  }
+  .map_calendar{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 525px) {
+  .header_revenue{
+
+  }
+ 
 }

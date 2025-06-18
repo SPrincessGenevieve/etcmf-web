@@ -21,11 +21,11 @@ export default function Mapchart() {
   ]);
 
   return (
-    <div className="h-full w-full min-h-[300px] bg-white p-4 rounded-2xl">
+    <div className="h-full w-full flex justify-center items-center relative min-h-[300px] bg-white p-4 rounded-2xl">
       <MapContainer
         center={position}
         zoom={12}
-        style={{ height: "100%", width: "100%" }}
+        style={{ height: "90%", width: "90%", zIndex: 1, position: "absolute" }}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

@@ -18,7 +18,7 @@ import { NotificationMockdata } from "@/lib/mock-data/notification_mockdata";
 
 export default function ToggleNotif() {
   return (
-    <Tabs defaultValue="all" className="w-auto max-w-[400px]">
+    <Tabs defaultValue="all" className="w-auto max-w-[400px] z-50">
       <TabsList className="w-full flex">
         <TabsTrigger value="all" className="w-auto">
           All
@@ -44,7 +44,7 @@ export default function ToggleNotif() {
           </DropdownMenuContent>
         </DropdownMenu>
       </TabsList>
-      <TabsContent value="all" className="border-none shadow-none">
+      <TabsContent value="all" className=" border-none shadow-none">
         <Card className="shadow-none border-none overflow-y-auto">
           <CardContent className="p-0 m-0 border-none shadow-none">
             {NotificationMockdata.map((item, index) => {

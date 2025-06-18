@@ -153,7 +153,7 @@ export default function ViolationDetails({
         </div>
         <div className="flex gap-4 w-full">
           <div className="w-full flex flex-col gap-2">
-            <p className="text-[12px]">DRIVER'S LICENSE NO.</p>
+            <p className="text-[12px]">DRIVER`&apos;`S LICENSE NO.</p>
             <Input
               disabled
               className="text-[12px]"

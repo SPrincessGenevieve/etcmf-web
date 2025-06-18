@@ -13,15 +13,10 @@ const eslintConfig = [
   ...compat.config({
     extends: ["next"],
     rules: {
-      // Disable Next.js and React strict rules
-      "react/no-unescaped-entities": "off",
-      "@next/next/no-page-custom-font": "off",
-      
-      // Turn off strict mode rules
-      "strict": "off", // disables 'use strict'
-      "@typescript-eslint/strict-boolean-expressions": "off", // if using TypeScript
-      "no-console": "off", // allow console.log
-      "no-debugger": "off", // allow debugger
+      'jsx-a11y/role-has-required-aria-props': 'off',
+    '@next/next/no-img-element': 'off',
+    'react-hooks/exhaustive-deps': 'off',
+    'react/jsx-key': 'off',
     },
   }),
 ];

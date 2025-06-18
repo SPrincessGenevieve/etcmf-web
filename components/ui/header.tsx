@@ -15,7 +15,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import MunicipalIcon from "@/images/rta-logo.png";
-import "@/app/globals.css"
+import "@/app/globals.css";
 
 export default function Header() {
   const router = useRouter();

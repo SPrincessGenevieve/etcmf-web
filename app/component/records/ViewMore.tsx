@@ -51,7 +51,7 @@ export default function ViewMore({
             Violation Details
           </TabsTrigger>
           <TabsTrigger className="text-[12px] text-size w-auto" value="id">
-            Driver's License
+            Driver`&apos;`s License
           </TabsTrigger>
           <TabsTrigger className="text-[12px] text-size w-auto" value="cor">
             Vehicle Registration

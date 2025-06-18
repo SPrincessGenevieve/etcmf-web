@@ -31,14 +31,12 @@ export default function DashboardLayout({
         <div className="flex h-full overflow-hidden">
         <AppSidebar />
         </div>
-        {/* <SidebarTrigger></SidebarTrigger> */}
         <div
           className={`w-full h-full flex items-center flex-col overflow-auto ${children_visibiliti}`}
         >
           <div className="w-full h-[55px] bg-white">
             <Header></Header>
           </div>
-          {/*  */}
           <div className={`p-2 w-full h-full overflow-y-auto bg-[#F6F6F6]`}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               {children}

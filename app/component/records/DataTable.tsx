@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Records, columns } from "@/app/etcmf/records/columns";
-import { DataTable } from "@/app/etcmf/records/data-table";
+import { DataTable } from "@/app/component/data-table";
 import { reportData } from "@/lib/mock-data/records_mockdata";
 
 interface TableProps {

@@ -53,9 +53,9 @@ export function AppSidebar() {
     });
   }, [isOpen, collapsed]);
 
-  useEffect(() =>{
-    console.log("OPEN", isOpen)
-  })
+  useEffect(() => {
+    console.log("OPEN", isOpen);
+  });
   return (
     <div
       className={`h-full pt-4 transition-all duration-300 ${

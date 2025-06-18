@@ -1,7 +1,5 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
-import Image from "next/image";
-import Profile from "@/images/profile.png";
 
 export default function VehicleRegistration() {
   return (
@@ -27,7 +25,7 @@ export default function VehicleRegistration() {
             <Input className="text-[12px]" disabled value={"BLACK"}></Input>
           </div>
           <div className="w-full">
-            <p>Owner's Name</p>
+            <p>Owner`&apos;`s Name</p>
             <Input
               className="text-[12px]"
               disabled
@@ -35,7 +33,7 @@ export default function VehicleRegistration() {
             ></Input>
           </div>
           <div className="w-full">
-            <p>Owner's Address</p>
+            <p>Owner`&apos;`s Address</p>
             <Input
               className="text-[12px]"
               disabled

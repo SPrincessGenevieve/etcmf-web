@@ -8,7 +8,7 @@ export default function TwoFactorAuth() {
       <div>
         <p className="text-[14px] font-semibold">Two-factor Authentication</p>
         <p className="text-[12px] text-gray-500">
-          Two-factor authentication enhances your account's security by
+          Two-factor authentication enhances your account`&apos;`s security by
           requiring more than just a password for signing in.
         </p>
       </div>

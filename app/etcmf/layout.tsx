@@ -28,14 +28,18 @@ export default function DashboardLayout({
   return (
     <SidebarProvider className="relative bg-[#F6F6F6] flex">
       <div className="flex overflow-hidden w-full bg-[#F6F6F6]">
-        <div className="flex h-full overflow-hidden">
-        <AppSidebar />
+        <div className="flex w-full max-w-15 h-full overflow-hidden relative">
+          <div className="w-15 h-full max-w-50 left-0 top-0 z-50 fixed">
+            <AppSidebar />
+          </div>
         </div>
         <div
           className={`w-full h-full flex items-center flex-col overflow-auto ${children_visibiliti}`}
         >
-          <div className="w-full h-[55px] bg-white">
-            <Header></Header>
+          <div className="w-full relative h-[55px] bg-white">
+            <div className="z-40 w-full pl-15 fixed right-0 bg-white h-[55px] ">
+              <Header></Header>
+            </div>
           </div>
           <div className={`p-2 w-full h-full overflow-y-auto bg-[#F6F6F6]`}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>

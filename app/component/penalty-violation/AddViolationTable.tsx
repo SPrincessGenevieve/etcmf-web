@@ -62,19 +62,19 @@ export default function AddViolationTable() {
         </TableCell>
       </TableHeader>
       <TableHeader className="uppercase">
-        <TableRow>
+        <TableRow className="bg-neutral-100">
           <TableHead className="min-w-[400px]">Violation</TableHead>
           <TableHead>Offense</TableHead>
           <TableHead className="min-w-[400px]">Fines</TableHead>
           <TableHead className="w-10">Action</TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody>
+      <TableBody className="border">
         {rows.map((row, rowIndex) =>
           offenseLabels.map((offense, offenseIndex) => (
-            <TableRow className="border-0" key={`${rowIndex}-${offenseIndex}`}>
+            <TableRow className="border" key={`${rowIndex}-${offenseIndex}`}>
               {offenseIndex === 0 && (
-                <TableCell rowSpan={4} className="p-0 relative">
+                <TableCell rowSpan={4} className="p-0 relative border">
                   <div className="h-full w-full absolute top-0 p-4">
                     <Textarea
                       value={row.violation}

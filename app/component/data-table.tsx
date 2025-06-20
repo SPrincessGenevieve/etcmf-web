@@ -19,19 +19,22 @@ import {
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Ellipsis } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  pageSize?: number;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  pageSize
 }: DataTableProps<TData, TValue>) {
   const [pagination, setPagination] = useState({
     pageIndex: 0,
-    pageSize: 10, // default rows per page
+    pageSize: pageSize || 10, // default rows per page
   });
 
   const table = useReactTable({
@@ -129,8 +132,9 @@ export function DataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
-      <div className="flex items-center justify-end space-x-2 py-4 px-2">
-        <Button
+      <div className="flex items-center justify-end space-x-2 py-4 px-2 overflow-x-auto">
+       <div className="flex gap-2 w-full">
+         <Button
           variant="outline"
           size="sm"
           className="rounded-full border bg-[#ebebeb] w-[40px] h-[40px]"
@@ -177,7 +181,7 @@ export function DataTable<TData, TValue>({
         </Button>
 
         <div className="flex gap-2 justify-center items-center">
-          <p className="text-[#464646]">Go to page:</p>
+          <Label className="text-[#464646] w-full min-w-20">Go to page:</Label>
           <Input
             type="number"
             min={1}
@@ -189,7 +193,7 @@ export function DataTable<TData, TValue>({
                 handleGoToPage();
               }
             }}
-            className="rounded-full text-center max-w-[70px] text-[12px] bg-[#ebebeb]"
+            className="rounded-full text-center w-full min-w-[70px] text-[12px] bg-[#ebebeb]"
           />
           <Button
             onClick={handleGoToPage}
@@ -198,6 +202,7 @@ export function DataTable<TData, TValue>({
             GO
           </Button>
         </div>
+       </div>
       </div>
     </div>
   );

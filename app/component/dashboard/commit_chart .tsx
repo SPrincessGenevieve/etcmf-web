@@ -91,12 +91,12 @@ const CommitChart: React.FC = () => {
   const weekdayLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
   return (
-    <div ref={ref} className="w-full h-full bg-white rounded-2xl p-4">
+    <div ref={ref} className="w-full h-full">
       <div className="flex items-center gap-3">
         <Sun />
         <p className="font-bold">Daily Violation</p>
       </div>
-      <div className="flex flex-col w-full mt-2">
+      <div className="flex flex-col ] w-full mt-2">
         {/* Month Labels */}
         <div className="flex ml-4 h-6 w-[90%] justify-evenly text-xs text-gray-600">
           {weeks.map((_, idx) => {
@@ -106,7 +106,7 @@ const CommitChart: React.FC = () => {
         </div>
 
         {/* Grid */}
-        <div className="flex">
+        <div className="flex w-full ]">
           <div className="flex flex-col text-xs text-gray-500 gap-[8px] mr-2 week-cont">
             {weekdayLabels.map((day, i) => (
               <div key={i} className="h-4 w-6 text-right">

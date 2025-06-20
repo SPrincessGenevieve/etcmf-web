@@ -4,10 +4,13 @@ import {
   Archive,
   ArchiveX,
   Car,
+  CircleDotDashed,
+  History,
   LayoutDashboard,
   Logs,
   PanelRightDashed,
   Settings,
+  SquareChartGantt,
   UserPlus,
 } from "lucide-react";
 
@@ -30,11 +33,10 @@ const items = [
   {
     title: "Penalty & Violation Management",
     url: "/etcmf/penalty-violation-management",
-    icon: Car,
+    icon: SquareChartGantt,
   },
-  { title: "Dropped Dispute", url: "/etcmf/dropped-dispute", icon: Settings },
-  { title: "Overdue", url: "/etcmf/overdue", icon: ArchiveX },
-  { title: "Logs", url: "/etcmf/logs", icon: Logs },
+  { title: "Service Logs", url: "/etcmf/service-logs", icon: CircleDotDashed },
+  { title: "Logs", url: "/etcmf/logs", icon: History },
 ];
 
 export function AppSidebar() {

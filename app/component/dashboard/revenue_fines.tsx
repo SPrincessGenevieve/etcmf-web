@@ -10,7 +10,8 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { Button } from "@/components/ui/button";
-import "@/app/globals.css"
+import "@/app/globals.css";
+import { useRouter } from "next/navigation";
 
 // Define allowed tabs as a union type
 type TabType = "Yearly" | "Monthly" | "Weekly" | "Daily";
@@ -58,23 +59,25 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
+
 export default function RevenueFines() {
   // Type the activeTab state as TabType
   const [activeTab, setActiveTab] = useState<TabType>("Monthly");
   const chartData = dataMap[activeTab];
   const maxValue = Math.max(...chartData.map((d: DataPoint) => d.value));
 
+
+
   return (
-    <div className="w-full h-full flex flex-col p-4 bg-white rounded-2xl">
-      
-      <div className="flex justify-between w-full max-h-[30px] h-full header_revenue">
-        <div className="flex items-center gap-3 w-full">
+    <div className="w-full h-full flex flex-col justify-between bg-white rounded-2xl">
+      <div className="rev-cont flex justify-between w-auto max-h-[40px] h-full header_revenue">
+        <div className="flex items-center gap-3 w-auto">
           <div className="border-2 border-black rounded-full w-6 h-6 flex justify-center items-center">
             <PhilippinePeso size={15} />
           </div>
           <p className="font-bold">Revenue of Fines</p>
         </div>
-        <div className="w-auto h-[30px] p-1 bg-[#EDEEF1] flex gap-2 justify-end rounded-[5px]">
+        <div className="w-auto h-[30px] z-50 p-1 bg-[#EDEEF1] flex gap-2 justify-end rounded-[5px]">
           {tabButton.map((item: TabType) => (
             <Button
               key={item}
@@ -93,7 +96,7 @@ export default function RevenueFines() {
         </div>
       </div>
 
-      <div className="flex flex-col w-full h-[70%] justify-between">
+      <div className="flex flex-col w-full h-[70%] mt-4 justify-between">
         <ChartContainer className="h-full w-full" config={chartConfig}>
           <BarChart data={chartData}>
             <CartesianGrid vertical={false} />
@@ -120,12 +123,12 @@ export default function RevenueFines() {
             </Bar>
           </BarChart>
         </ChartContainer>
-        <div className="w-full flex flex-col items-end">
-          <p className="text-[12px]">Total: ₱245, 934.60</p>
-          <div className="flex gap-2">
-            <ChevronUp size={10} color="green"></ChevronUp>
-            <p className="text-[8px]">18.4% last year</p>
-          </div>
+      </div>
+      <div className="w-full flex flex-col items-end">
+        <p className="text-[12px]">Total: ₱245, 934.60</p>
+        <div className="flex gap-2">
+          <ChevronUp size={10} color="green"></ChevronUp>
+          <p className="text-[8px]">18.4% last year</p>
         </div>
       </div>
     </div>

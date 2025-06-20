@@ -45,28 +45,27 @@ export default function ViolationToday() {
         <p className="font-bold">Violation Today</p>
       </div>
       <div className="relative flex flex-col w-full h-full justify-between">
-        <div className="w-full h-full">
-          <ChartContainer config={chartConfig} className="">
-            <div className="p-0 m-0 flex h-full justify-center items-center">
-              <PieChart className="" width={150} height={150}>
-                <ChartTooltip
-                  cursor={false}
-                  content={<ChartTooltipContent hideLabel />}
-                />
-                <Pie
-                  data={chartData}
-                  dataKey="visitors"
-                  nameKey="browser"
-                  innerRadius={40}
-                  outerRadius={60}
-                  paddingAngle={10}
-                  cornerRadius={4}
-                />
-              </PieChart>
-            </div>
-          </ChartContainer>
-        </div>
-        <div className="violation_today w-full min-h-[50px] grid grid-cols-2 ">
+        <ChartContainer config={chartConfig} className="">
+          <div className="p-0 m-0 flex h-full justify-center items-center">
+            <PieChart className="" width={150} height={150}>
+              <ChartTooltip
+                cursor={false}
+                content={<ChartTooltipContent hideLabel />}
+              />
+              <Pie
+                data={chartData}
+                dataKey="visitors"
+                nameKey="browser"
+                innerRadius={40}
+                outerRadius={60}
+                paddingAngle={10}
+                cornerRadius={4}
+              />
+            </PieChart>
+          </div>
+        </ChartContainer>
+      </div>
+      <div className="violation_today w-full min-h-[50px] grid grid-cols-2 ">
           {chartData.map((item, index) => (
             <div key={index} className="flex items-center gap-2">
               <div
@@ -79,7 +78,6 @@ export default function ViolationToday() {
             </div>
           ))}
         </div>
-      </div>
     </div>
   );
 }

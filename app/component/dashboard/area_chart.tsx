@@ -45,80 +45,70 @@ const distributionConfig = {
 
 export default function Areachart() {
   return (
-    <div className="w-full">
-      <Card className="">
-        <CardHeader>
-          <div className="flex item-center gap-3">
-            <div>
-              <TicketsPlane />
-            </div>
-            <p className="font-bold">Ticket Distribution</p>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <ChartContainer
-            config={distributionConfig}
-            className="m-0 p-0 h-[170px] w-full"
-          >
-            <AreaChart
-              accessibilityLayer
-              data={distribution}
-              margin={{
-                left: 12,
-                right: 12,
-              }}
-            >
-              <CartesianGrid vertical={false} />
-              <XAxis
-                dataKey="month"
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-                tickFormatter={(value) => value.slice(0, 3)}
-              />
-              <ChartTooltip
-                cursor={false}
-                content={<ChartTooltipContent indicator="dot" />}
-              />
-              <Area
-                dataKey="Done"
-                type="natural"
-                fill="var(--color-Done)"
-                fillOpacity={0.4}
-                stroke="var(--color-Done)"
-                stackId="a"
-              />
-              <Area
-                dataKey="Pending"
-                type="natural"
-                fill="var(--color-Pending)"
-                fillOpacity={0.4}
-                stroke="var(--color-Pending)"
-                stackId="a"
-              />
+    <div className="w-full h-full flex flex-col">
+      <div className="flex item-center gap-3">
+        <div>
+          <TicketsPlane />
+        </div>
+        <p className="font-bold">Ticket Distribution</p>
+      </div>
+      <ChartContainer config={distributionConfig} className="w-full h-full">
+        <AreaChart
+          accessibilityLayer
+          data={distribution}
+          margin={{
+            left: 12,
+            right: 12,
+          }}
+        >
+          <CartesianGrid vertical={false} />
+          <XAxis
+            dataKey="month"
+            tickLine={false}
+            axisLine={false}
+            tickMargin={8}
+            tickFormatter={(value) => value.slice(0, 3)}
+          />
+          <ChartTooltip
+            cursor={false}
+            content={<ChartTooltipContent indicator="dot" />}
+          />
+          <Area
+            dataKey="Done"
+            type="natural"
+            fill="var(--color-Done)"
+            fillOpacity={0.4}
+            stroke="var(--color-Done)"
+            stackId="a"
+          />
+          <Area
+            dataKey="Pending"
+            type="natural"
+            fill="var(--color-Pending)"
+            fillOpacity={0.4}
+            stroke="var(--color-Pending)"
+            stackId="a"
+          />
 
-              <Area
-                dataKey="Dispute"
-                type="natural"
-                fill="var(--color-Dispute)"
-                fillOpacity={0.4}
-                stroke="var(--color-Dispute)"
-                stackId="a"
-              />
+          <Area
+            dataKey="Dispute"
+            type="natural"
+            fill="var(--color-Dispute)"
+            fillOpacity={0.4}
+            stroke="var(--color-Dispute)"
+            stackId="a"
+          />
 
-              <Area
-                dataKey="Overdue"
-                type="natural"
-                fill="var(--color-Overdue)"
-                fillOpacity={0.4}
-                stroke="var(--color-Overdue)"
-                stackId="a"
-              />
-            </AreaChart>
-          </ChartContainer>
-        </CardContent>
-        <CardFooter></CardFooter>
-      </Card>
+          <Area
+            dataKey="Overdue"
+            type="natural"
+            fill="var(--color-Overdue)"
+            fillOpacity={0.4}
+            stroke="var(--color-Overdue)"
+            stackId="a"
+          />
+        </AreaChart>
+      </ChartContainer>
     </div>
   );
 }

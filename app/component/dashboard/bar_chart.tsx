@@ -43,7 +43,7 @@ export default function Barchart() {
   }));
 
   return (
-    <div className="w-full h-full flex flex-col p-4 bg-white rounded-2xl">
+    <div className="w-full">
       <div className="flex item-center gap-3 w-full">
         <div>
           <ChartBar></ChartBar>

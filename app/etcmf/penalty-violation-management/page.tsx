@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { DiamondPlus, Filter, Search } from "lucide-react";
 import React from "react";
 import { useRouter } from "next/navigation";
+import "@/app/globals.css"
 
 export default function PennaltyViolationManagement() {
   const router = useRouter()
@@ -15,12 +16,12 @@ export default function PennaltyViolationManagement() {
   }
 
   return (
-    <div className="w-full h-full flex flex-col gap-2">
-      <div className="w-full min-h-[60px] flex h-auto">
+    <div className="w-full h-full flex flex-col gap-2 px-4">
+      <div className="w-full min-h-[60px] flex h-auto violation-search-cont">
         <div className="w-full">
           <p className="text-[18px] font-medium">Violation Management</p>
           <p className="text-[12px] text-gray-500 font-medium">
-            Total Users: 30
+            Total Ordinance: 30
           </p>
         </div>
         <div className="w-full">

@@ -3,10 +3,7 @@
 import React from "react";
 import { ChartNoAxesColumnDecreasing } from "lucide-react";
 import { RadialBar, RadialBarChart, ResponsiveContainer } from "recharts";
-import {
-  type ChartConfig,
-  ChartContainer,
-} from "@/components/ui/chart";
+import { type ChartConfig, ChartContainer } from "@/components/ui/chart";
 
 const chartData = [
   { ticket: "Total Tickets", drivers: 275, fill: "#08442B" },
@@ -43,7 +40,7 @@ const chartConfig = {
 
 export default function RadialChart() {
   return (
-    <div className="w-full h-full bg-[white] rounded-2xl p-4 flex flex-col justify-between">
+    <div>
       <div className="w-full  flex item-center gap-3">
         <div className="border-black border-2">
           <ChartNoAxesColumnDecreasing size={18} />
@@ -51,20 +48,18 @@ export default function RadialChart() {
         <p className="font-bold">Ticket Summary</p>
       </div>
 
-      <ChartContainer className="" config={chartConfig} title="Ticket Summary">
-        <div className="p-0 m-0 flex h-full justify-center items-center">
-          <ResponsiveContainer width="100%" height="100%">
+      <div>
+        <ChartContainer config={chartConfig} title="Ticket Summary">
+          <ResponsiveContainer>
             <RadialBarChart
               data={chartData}
-              innerRadius={20}
-              outerRadius={65}
               margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
             >
               <RadialBar dataKey="drivers" />
             </RadialBarChart>
           </ResponsiveContainer>
-        </div>
-      </ChartContainer>
+        </ChartContainer>
+      </div>
       <div className="grid grid-cols-2 gap-2 w-full">
         {chartData.map((item, index) => (
           <div key={index} className="flex items-center gap-2">

@@ -44,14 +44,14 @@ export default function ViewMore({
   email,
 }: DetailsProps) {
   return (
-    <div className="flex flex-col gap-5 w-full min-h-[300px]">
+    <div className="flex flex-col gap-5 w-full h-[700px]">
       <Tabs defaultValue="violation" className="full">
         <TabsList className="grid grid-cols-3 w-full my-4">
           <TabsTrigger className="text-[12px] text-size w-auto" value="violation">
             Violation Details
           </TabsTrigger>
           <TabsTrigger className="text-[12px] text-size w-auto" value="id">
-            Driver`&apos;`s License
+            Driver&apos;s License
           </TabsTrigger>
           <TabsTrigger className="text-[12px] text-size w-auto" value="cor">
             Vehicle Registration

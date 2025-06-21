@@ -12,6 +12,7 @@ import { MoreHorizontal } from "lucide-react";
 import { useState } from "react";
 import { PenaltyProps } from "@/lib/type/type";
 import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
 
 function ActionsCell({ row }: { row: any }) {
   const [viewMore, setViewMore] = useState(false);
@@ -56,6 +57,21 @@ export const columnsPenalty: ColumnDef<PenaltyProps>[] = [
   {
     accessorKey: "description",
     header: "Description",
+    cell: ({ row }) => {
+      const CellSwitch = () => {
+        const desc = row.original.description;
+
+        return (
+          <div className="w-full flex">
+            <p className="w-full max-w-[800px] text-justify break-words whitespace-pre-wrap">
+              {desc}
+            </p>
+          </div>
+        );
+      };
+
+      return <CellSwitch />;
+    },
   },
   {
     accessorKey: "creator",

@@ -21,6 +21,7 @@
     "@heroui/system": "^2.4.15",
     "@heroui/theme": "^2.4.15",
     "@internationalized/date": "^3.8.0",
+    "@lottiefiles/dotlottie-react": "^0.14.1",
     "@mui/icons-material": "^7.1.0",
     "@mui/material": "^7.1.0",
     "@mui/x-date-pickers": "^8.3.0",

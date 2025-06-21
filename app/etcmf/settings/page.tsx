@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, FingerprintIcon } from "lucide-react";
+import { ChevronLeft, Edit, FingerprintIcon } from "lucide-react";
 import React, { useState } from "react";
 import PersonIcon from "@mui/icons-material/Person";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
@@ -12,6 +12,9 @@ import ContactDetails from "@/app/component/settings/ContactDetails";
 import PasswordSecurity from "@/app/component/settings/PasswordSecurity";
 import TwoFactorAuth from "@/app/component/settings/TwoFactorAuth";
 import { useRouter } from "next/navigation";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import UpdateProfile from "@/app/component/settings/UpdateProfile";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 export default function Settings() {
   const router = useRouter();
@@ -66,6 +69,18 @@ export default function Settings() {
                 Learn more.
               </span>
             </p>
+          </div>
+          <div className="w-full flex justify-center items-center relative">
+            <div className="absolute z-30 top-0 right-0">
+              <UpdateProfile></UpdateProfile>
+            </div>
+            <Avatar className="w-50 h-auto shadow border">
+              <AvatarImage
+                src={
+                  "https://i.pinimg.com/236x/b4/22/27/b42227b55bae72b1d3894db148b44c55.jpg"
+                }
+              ></AvatarImage>
+            </Avatar>
           </div>
 
           <div className="gap-2 flex flex-col">

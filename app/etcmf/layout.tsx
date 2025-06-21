@@ -41,7 +41,7 @@ export default function DashboardLayout({
               <Header></Header>
             </div>
           </div>
-          <div className={`p-2 w-full h-full overflow-y-auto bg-[#F6F6F6]`}>
+          <div className={`p-2 pt-3 w-full h-full overflow-y-auto bg-[#F6F6F6]`}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               {children}
             </LocalizationProvider>

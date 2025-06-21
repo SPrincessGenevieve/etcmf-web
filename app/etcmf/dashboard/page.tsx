@@ -127,7 +127,6 @@ export default function Dashboard() {
             <Card className="h-full">
               <CardContent className="overflow-y-auto flex flex-col gap-4">
                 <ServiceLog></ServiceLog>
-                
               </CardContent>
             </Card>
           </div>

@@ -40,7 +40,7 @@ const chartConfig = {
 
 export default function RadialChart() {
   return (
-    <div>
+    <div className="w-full">
       <div className="w-full  flex item-center gap-3">
         <div className="border-black border-2">
           <ChartNoAxesColumnDecreasing size={18} />

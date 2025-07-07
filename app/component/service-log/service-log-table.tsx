@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { columnsServiceLogs } from "@/app/etcmf/service-logs/columns";
+import { columnsServiceLogs } from "@/app/etcmf/dtr/columns";
 import { service_log_mockdata } from "@/lib/mock-data/service_log_mockdata";
 import { DataTable } from "../data-table";
 import { ServiceLogsProps } from "@/lib/type/type";

@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import React, { useEffect, useState } from "react";
 import Key from "@/images/Key.svg";
 import { useRouter } from "next/navigation";
+import Loading from "@/app/component/Loading";
 
 export default function UpdatePassword() {
   const router = useRouter();
@@ -15,6 +16,11 @@ export default function UpdatePassword() {
 
   const [newPassword, setNewPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
+
+  const [loading, setLoading] = useState({
+    login: false,
+    back: false,
+  });
 
   useEffect(() => {
     const strongPasswordRegex =
@@ -33,6 +39,12 @@ export default function UpdatePassword() {
   const NavigateSignIn = () => {
     router.push("/");
   };
+
+  const NavBack = () =>{
+    setLoading((prev) => ({ ...prev, back: true }));
+    router.push("/");
+  }
+
   return (
     <div className="flex flex-col gap-8">
       <Image
@@ -102,13 +114,15 @@ export default function UpdatePassword() {
             onClick={NavigateSignIn}
             className="cursor-pointer bg-white text-[#3e7c1f] hover:bg-transparent hover:text-white border border-white"
           >
+            {loading.login && <Loading strokeColor="green" />}
             Update Password
           </Button>
           <Button
-            onClick={NavigateSignIn}
+            onClick={NavBack}
             variant={"ghost"}
             className="hover:bg-[transparent] cursor-pointer w-auto p-0 m-0 flex justify-center text-center text-white font-light"
           >
+            {loading.back && <Loading strokeColor="white" />}
             Sign in Instead
           </Button>
         </div>

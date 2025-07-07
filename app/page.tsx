@@ -9,15 +9,21 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import "@/app/globals.css";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import Loading from "./component/Loading";
 
 export default function Home() {
   const router = useRouter();
+  const [recoverLoading, setRecoveryLoading] = useState(false);
+  const [loginLoading, setLoginLoading] = useState(false);
 
   const NavigateRecovery = () => {
+    setRecoveryLoading(true)
     router.push("/auth/recovery");
   };
 
   const Login = () => {
+    setLoginLoading(true)
     router.push("/auth/otp-scan");
   };
 
@@ -88,12 +94,14 @@ export default function Home() {
               variant={"ghost"}
               className="hover:bg-[transparent] cursor-pointer w-auto p-0 m-0 flex justify-end text-right text-white font-light"
             >
+              {recoverLoading && <Loading strokeColor="white"></Loading>}
               Forgot Password?
             </Button>
             <Button
               onClick={Login}
-              className="cursor-pointer bg-white text-[#3e7c1f] hover:bg-transparent hover:text-white border border-white"
+              className="relative cursor-pointer bg-white text-[#3e7c1f] hover:bg-transparent hover:text-white border border-white"
             >
+              {loginLoading && <Loading strokeColor="green"></Loading>}
               Login
             </Button>
             <div className="w-full h-full border-t border-white flex py-6 mt-[7%]">

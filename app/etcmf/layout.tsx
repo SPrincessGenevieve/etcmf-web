@@ -2,12 +2,12 @@
 import "@/app/globals.css";
 import { SidebarProvider } from "@/components/ui/sidebar";
 
-import Header from "@/components/ui/header";
+import { Navbar } from "@/components/ui/navbar";
 import { useUserContext } from "../context/UserContext";
 import { useEffect, useState } from "react";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { AppSidebar } from "@/app/component/dashboard/app_sidebar";
+import Sidebar from "@/app/component/dashboard/app_sidebar";
 
 export default function DashboardLayout({
   children,
@@ -30,7 +30,7 @@ export default function DashboardLayout({
       <div className="flex overflow-hidden w-full bg-[#F6F6F6]">
         <div className="flex w-full max-w-15 h-full overflow-hidden relative">
           <div className="w-15 h-full max-w-50 left-0 top-0 z-50 fixed">
-            <AppSidebar />
+            <Sidebar></Sidebar>
           </div>
         </div>
         <div
@@ -38,10 +38,12 @@ export default function DashboardLayout({
         >
           <div className="w-full relative h-[55px] bg-white">
             <div className="z-40 w-full pl-15 fixed right-0 bg-white h-[55px] ">
-              <Header></Header>
+              <Navbar></Navbar>
             </div>
           </div>
-          <div className={`p-2 pt-3 w-full h-full overflow-y-auto bg-[#F6F6F6]`}>
+          <div
+            className={`p-2 pt-3 w-full h-full overflow-y-auto bg-[#F6F6F6]`}
+          >
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               {children}
             </LocalizationProvider>

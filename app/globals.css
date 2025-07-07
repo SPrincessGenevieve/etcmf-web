@@ -238,6 +238,24 @@
   .setting_text {
     display: none;
   }
+  .profile_avatar{
+    max-width: 4vh
+  }
+
+  .pen, .profile_back{
+    display: none;
+  }
+  .pen_cont{
+    background-color: transparent;
+  }
+
+  .edit_avatar{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+  }
 
   .setting_l2,
   .setting_l1 {
@@ -283,5 +301,11 @@
 @media (max-width: 525px) {
   .rev-cont {
     flex-direction: column;
+  }
+}
+
+@media (max-width: 780px) {
+  .municipal {
+    display: none;
   }
 }

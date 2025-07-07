@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import Key from "@/images/Key.svg";
 import { useRouter } from "next/navigation";
 import {
@@ -27,15 +27,23 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import OTPHelp from "@/app/component/auth/otp-scan/OTPHelp";
+import DialogHelp from "@/app/component/dashboard/dialog-help";
+import Loading from "@/app/component/Loading";
 
 export default function OTPScan() {
   const router = useRouter();
+  const [loading, setLoading] = useState({
+    login: false,
+    back: false,
+  });
 
   const NavigateSignIn = () => {
+    setLoading((prev) => ({ ...prev, back: true }));
     router.push("/");
   };
 
   const NavigateToDashboard = () => {
+    setLoading((prev) => ({ ...prev, login: true }));
     router.push("/etcmf/dashboard");
   };
 
@@ -68,38 +76,12 @@ export default function OTPScan() {
                   <Avatar className="w-[25px] h-[25px]">
                     <AvatarImage
                       src={
-                        "https://scontent.fmnl14-1.fna.fbcdn.net/v/t39.30808-1/464115817_3669993786645187_3329516257053704408_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=109&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeE25rlhBG6vtaeITU36P4l0yjfTumkzSqzKN9O6aTNKrEqQCV91fZFZzDnTm-8J_F12wqy7Ws72BuDKp0-yGdDI&_nc_ohc=s-OGCxNLAiYQ7kNvwHj0fbp&_nc_oc=AdnPdm8Y3wZvQEi5N_edzGIYqIZVZCt7dj9dsVUbzNegTCPwSRW0MWD4Wba7ZQxW7-U&_nc_zt=24&_nc_ht=scontent.fmnl14-1.fna&_nc_gid=CDnyRWLvAOXLx4ABoVLpmQ&oh=00_AfEjPQcWog2PMWOXnFdx5Et28aO1EBN_lTMfbRAJll0qkg&oe=681BAC50"
+                        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.vecteezy.com%2Fsystem%2Fresources%2Fpreviews%2F009%2F749%2F751%2Foriginal%2Favatar-man-icon-cartoon-male-profile-mascot-illustration-head-face-business-user-logo-free-vector.jpg&f=1&nofb=1&ipt=f6ad8ec45e8e7a90610593dd005bb803d60fbf22e89929aeeb3172afb30a7c13"
                       }
                     ></AvatarImage>
-                    <AvatarFallback></AvatarFallback>
+                    <AvatarFallback>VA</AvatarFallback>
                   </Avatar>{" "}
                   <p>user1@example.com</p>
-                </div>
-              </SelectItem>
-              <SelectItem value="user2@example.com">
-                <div className="w-full flex gap-2 justify-center items-center">
-                  <Avatar className="w-[25px] h-[25px]">
-                    <AvatarImage
-                      src={
-                        "https://scontent.fmnl14-1.fna.fbcdn.net/v/t39.30808-1/453482117_1511268309474073_8564418274478349089_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=107&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeFfFtLFzLX7uGOOE4DlQc-kAYmqPWAqVuwBiao9YCpW7NDwfMdIdXNYKUQ-y0dQG_ZETYAGm2eUAhiEg63gUAxl&_nc_ohc=2Emq9wARupoQ7kNvwGItiX7&_nc_oc=Adk3wDXQA3Z7_07tLNmfvBXzwYhgKuzpYzURdB7OO3DYgiyP8eq8J8G0kTit1FtU3Ig&_nc_zt=24&_nc_ht=scontent.fmnl14-1.fna&_nc_gid=BI2NmJiK9snvCle59oh-3g&oh=00_AfGs-x1PteVxmWvl_kM9NUvBejtNCDGt2yw2zGsF9U97wA&oe=681B9710"
-                      }
-                    ></AvatarImage>
-                    <AvatarFallback></AvatarFallback>
-                  </Avatar>{" "}
-                  <p>user2@example.com</p>
-                </div>
-              </SelectItem>
-              <SelectItem value="admin@yourdomain.com">
-                <div className="w-full flex gap-2 justify-center items-center">
-                  <Avatar className="w-[25px] h-[25px]">
-                    <AvatarImage
-                      src={
-                        "https://scontent.fcgy2-1.fna.fbcdn.net/v/t39.30808-1/483804629_122179551212055425_1581859817356305622_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=102&ccb=1-7&_nc_sid=e99d92&_nc_eui2=AeGbRVw41M4CMKtzK0eX-XMb7gAF6ZHCGeLuAAXpkcIZ4rtUjby7cKCfoLOgM9brlccLeMLNQSmd8RR5cAz9wisC&_nc_ohc=LqBJEO7A7SYQ7kNvwFe61dT&_nc_oc=AdnXXMdjDIF_2I8RaRImdjens-hBMb9oZtL0Pv7XVGAOF1IG2r5kYb_EvjkHoGJd6Qk&_nc_zt=24&_nc_ht=scontent.fcgy2-1.fna&_nc_gid=uU_0ploRiyDH7W_rhbOaaQ&oh=00_AfHY5pZhzHZcGdzwGOifaVxhsJJDINWwp2e7iDoKca736Q&oe=681BB93A"
-                      }
-                    ></AvatarImage>
-                    <AvatarFallback></AvatarFallback>
-                  </Avatar>{" "}
-                  <p>user3@example.com</p>
                 </div>
               </SelectItem>
             </SelectContent>
@@ -135,27 +117,13 @@ export default function OTPScan() {
           </InputOTP>
         </div>
         <div className="w-full flex flex-col gap-4">
-          <Dialog>
-            <DialogTrigger className="text-white font-light text-[12px] flex w-full">
-              Do you need help?
-            </DialogTrigger>
-            <DialogContent className="max-h-[90%] overflow-y-auto">
-              <DialogTitle>
-                How to Set Up OTP Using Google Authenticator for Added Security
-              </DialogTitle>
-              <DialogDescription>
-                Google Authenticator provides an extra layer of security by
-                generating a unique One-Time Password (OTP) for you to use
-                during login. Follow these steps to set it up:
-              </DialogDescription>
-              <OTPHelp></OTPHelp>
-            </DialogContent>
-          </Dialog>
+          <DialogHelp></DialogHelp>
 
           <Button
             onClick={NavigateToDashboard}
             className="cursor-pointer bg-white text-[#3e7c1f] hover:bg-transparent hover:text-white border border-white"
           >
+            {loading.login && <Loading strokeColor="green" />}
             Login
           </Button>
           <Button
@@ -163,6 +131,7 @@ export default function OTPScan() {
             variant={"ghost"}
             className="hover:bg-[transparent] cursor-pointer w-auto p-0 m-0 flex justify-center text-center text-white font-light"
           >
+            {loading.back && <Loading strokeColor="white" />}
             Back to Sign-in
           </Button>
         </div>

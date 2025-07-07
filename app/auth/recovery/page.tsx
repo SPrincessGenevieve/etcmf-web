@@ -4,18 +4,24 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { Label } from "@/components/ui/label";
-import React from "react";
+import React, { useState } from "react";
 import Key from "@/images/Key.svg";
 import { useRouter } from "next/navigation";
+import Loading from "@/app/component/Loading";
 
 export default function Recovery() {
   const router = useRouter();
-
+  const [loading, setLoading] = useState({
+    request: false,
+    back: false,
+  });
   const NavigateSignIn = () => {
+    setLoading((prev) => ({ ...prev, back: true }));
     router.push("/");
   };
 
   const NavigateUpdatePassword = () => {
+    setLoading((prev) => ({ ...prev, request: true }));
     router.push("/auth/password-update");
   };
 
@@ -49,6 +55,7 @@ export default function Recovery() {
             onClick={NavigateUpdatePassword}
             className="cursor-pointer bg-white text-[#3e7c1f] hover:bg-transparent hover:text-white border border-white"
           >
+            {loading.request && <Loading strokeColor="green"></Loading>}
             Request Reset
           </Button>
           <Button
@@ -56,7 +63,8 @@ export default function Recovery() {
             variant={"ghost"}
             className="hover:bg-[transparent] cursor-pointer w-auto p-0 m-0 flex justify-center text-center text-white font-light"
           >
-            Sign in Instead
+            {loading.back && <Loading strokeColor="white"></Loading>} Sign in
+            Instead
           </Button>
         </div>
         <div className="w-full h-full border-t border-white flex py-6 mt-[7%]">

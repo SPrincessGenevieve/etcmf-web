@@ -1,13 +1,8 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { user_status } from "@/lib/mock-data/user_status";
-import { Dot, Sun, User } from "lucide-react";
 import dynamic from "next/dynamic";
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { useRouter } from "next/navigation";
 import ServiceLog from "@/app/component/dashboard/service_log";
 

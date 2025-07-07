@@ -52,9 +52,9 @@ export default function Settings() {
         <div className="flex flex-col gap-4">
           <div
             onClick={navigateBack}
-            className="flex gap-2 text-[12px] items-center cursor-pointer setting_back"
+            className="profile_back flex gap-2 text-[12px] items-center cursor-pointer setting_back"
           >
-            <ChevronLeft size={20} color="#3E7C1F"></ChevronLeft>
+            <ChevronLeft className="profile_back" size={20} color="#3E7C1F"></ChevronLeft>
             <p className="text-[#3E7C1F] setting_text">Go Back</p>
           </div>
 
@@ -70,11 +70,11 @@ export default function Settings() {
               </span>
             </p>
           </div>
-          <div className="w-full flex justify-center items-center relative">
-            <div className="absolute z-30 top-0 right-0">
+          <div className="w-full  flex justify-center items-center relative">
+            <div className="absolute z-30 top-0 right-0 edit_avatar">
               <UpdateProfile></UpdateProfile>
             </div>
-            <Avatar className="w-50 h-auto shadow border">
+            <Avatar className="profile_avatar w-full max-w-50 h-auto shadow border">
               <AvatarImage
                 src={
                   "https://i.pinimg.com/236x/b4/22/27/b42227b55bae72b1d3894db148b44c55.jpg"

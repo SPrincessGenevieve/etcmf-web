@@ -30,8 +30,8 @@ export default function UpdateProfile() {
   return (
     <div>
       <Dialog>
-        <DialogTrigger className="h-7 w-7 rounded-full bg-[#3E7C1F] flex items-center justify-center">
-          <Edit color="white" size={15} />
+        <DialogTrigger className="pen_cont h-10 w-10 rounded-full bg-[#3E7C1F] flex items-center justify-center">
+          <Edit className="pen" color="white" size={15} />
         </DialogTrigger>
         <DialogContent>
           <DialogTitle>

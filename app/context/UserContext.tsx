@@ -1,5 +1,4 @@
 "use client";
-// import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import {
   createContext,
   useState,
@@ -7,46 +6,129 @@ import {
   useContext,
   useEffect,
 } from "react";
+import { tokenManager } from "@/lib/utils/api";
+
+type User = {
+  id: string;
+  firstname: string;
+  lastname: string;
+  middlename?: string;
+  email: string;
+  picture?: string;
+  createdAt: string;
+  updatedAt: string;
+};
 
 type UserContextType = {
-  isOpen: boolean;
+  user: User | null;
+  token: string | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  login: (token: string, user: User) => void;
+  logout: () => void;
   setUserDetails: (details: Partial<UserContextType>) => void;
-  
 };
 
 const defaultUserContext: UserContextType = {
-  isOpen: true,
+  user: null,
+  token: null,
+  isAuthenticated: false,
+  isLoading: true,
+  login: () => {},
+  logout: () => {},
   setUserDetails: () => {},
 };
 
 const UserContext = createContext<UserContextType>(defaultUserContext);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [userDetails, setUserDetailsState] =
-    useState<UserContextType>(defaultUserContext);
+  const [userDetails, setUserDetailsState] = useState<{
+    user: User | null;
+    token: string | null;
+    isAuthenticated: boolean;
+    isLoading: boolean;
+  }>({
+    user: null,
+    token: null,
+    isAuthenticated: false,
+    isLoading: true,
+  });
 
   useEffect(() => {
-    const savedUserData = JSON.parse(
-      localStorage.getItem("userDetails") || "{}"
-    );
-    setUserDetailsState((prev) => ({ ...prev, ...savedUserData }));
+    // Check for existing token on app load
+    const token = tokenManager.getToken();
+    if (token && tokenManager.isValidToken(token)) {
+      const savedUserData = localStorage.getItem("userData");
+      if (savedUserData) {
+        try {
+          const user = JSON.parse(savedUserData);
+          setUserDetailsState({
+            user,
+            token,
+            isAuthenticated: true,
+            isLoading: false,
+          });
+        } catch (error) {
+          console.error("Failed to parse user data:", error);
+          tokenManager.removeToken();
+          localStorage.removeItem("userData");
+          setUserDetailsState({
+            user: null,
+            token: null,
+            isAuthenticated: false,
+            isLoading: false,
+          });
+        }
+      }
+    } else {
+      setUserDetailsState(prev => ({ ...prev, isLoading: false }));
+    }
   }, []);
 
-  const setUserDetails = (details: Partial<UserContextType>) => {
-    const updatedUserDetails = { ...userDetails, ...details };
+  const login = (token: string, user: User) => {
+    tokenManager.setToken(token);
+    localStorage.setItem("userData", JSON.stringify(user));
+    setUserDetailsState({
+      user,
+      token,
+      isAuthenticated: true,
+      isLoading: false,
+    });
+  };
 
-    // Check if the details have actually changed before updating
-    if (JSON.stringify(updatedUserDetails) !== JSON.stringify(userDetails)) {
-      setUserDetailsState(updatedUserDetails as UserContextType);
-      localStorage.setItem("userDetails", JSON.stringify(updatedUserDetails));
-    }
+  const logout = () => {
+    tokenManager.removeToken();
+    localStorage.removeItem("userData");
+    setUserDetailsState({
+      user: null,
+      token: null,
+      isAuthenticated: false,
+      isLoading: false,
+    });
+  };
+
+  const setUserDetails = (details: Partial<UserContextType>) => {
+    setUserDetailsState(prev => ({ ...prev, ...details }));
   };
 
   return (
-    <UserContext.Provider value={{ ...userDetails, setUserDetails }}>
+    <UserContext.Provider 
+      value={{ 
+        ...userDetails, 
+        login, 
+        logout, 
+        setUserDetails 
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
 };
 
-export const useUserContext = () => useContext(UserContext);
+export const useUser = () => {
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error("useUser must be used within a UserProvider");
+  }
+  return context;
+};

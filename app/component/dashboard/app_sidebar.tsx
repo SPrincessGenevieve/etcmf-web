@@ -21,7 +21,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import OfficerIcon from "@/images/officer_icon.svg";
 import Image from "next/image";
-import { useUserContext } from "@/app/context/UserContext";
+import { useUser } from "@/app/context/UserContext";
 
 const items = [
   { title: "Dashboard", url: "/etcmf/dashboard", icon: LayoutDashboard },
@@ -40,7 +40,7 @@ const items = [
 export function AppSidebar() {
   const [collapsed, setCollapsed] = useState(true);
   const pathname = usePathname();
-  const { setUserDetails, isOpen } = useUserContext();
+  const { user } = useUser();
 
   const handleCollapse = () => {
     const newCollapsed = !collapsed;
@@ -48,14 +48,9 @@ export function AppSidebar() {
   };
 
   useEffect(() => {
-    setUserDetails({
-      isOpen: collapsed,
-    });
-  }, [isOpen, collapsed]);
-
-  useEffect(() => {
-    console.log("OPEN", isOpen);
-  });
+    // Sidebar state is now managed locally
+    console.log("Sidebar collapsed:", collapsed);
+  }, [collapsed]);
   return (
     <div
       className={`h-full pt-4 transition-all duration-300 ${

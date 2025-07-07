@@ -9,16 +9,93 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import "@/app/globals.css";
 import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { authAPI } from "@/lib/utils/api";
+import { useUser } from "@/app/context/UserContext";
 
 export default function Home() {
   const router = useRouter();
+  const { login, isAuthenticated, isLoading } = useUser();
+  
+  // Form state
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (!isLoading && isAuthenticated) {
+      router.push("/etcmf/dashboard");
+    }
+  }, [isAuthenticated, isLoading, router]);
+
+  // Show loading while checking authentication
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-[#0B6540]">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-white"></div>
+      </div>
+    );
+  }
+
+
+  if (isAuthenticated) {
+    return null;
+  }
 
   const NavigateRecovery = () => {
     router.push("/auth/recovery");
   };
 
-  const Login = () => {
-    router.push("/auth/otp-scan");
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+    if (error) setError("");
+  };
+
+  const handleLogin = async () => {
+    setError("");
+    
+    // Basic validation
+    if (!formData.email || !formData.password) {
+      setError("Please fill in all fields");
+      return;
+    }
+
+    if (!formData.email.includes("@")) {
+      setError("Please enter a valid email address");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await authAPI.loginAdmin(formData.email, formData.password);
+      
+      // Store token and user data
+      login(response.token, response.admin);
+      
+      // Navigate to OTP scan page (maintaining your current flow)
+      router.push("/auth/otp-scan");
+      
+    } catch (error: any) {
+      console.error("Login failed:", error);
+      setError(error.message || "Login failed. Please check your credentials.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      handleLogin();
+    }
   };
 
   return (
@@ -68,33 +145,57 @@ export default function Home() {
 
           {/* FOOTER */}
           <div className="mt-[10%] flex flex-col gap-3 h-[70%] justify-center">
+            {/* Error message */}
+            {error && (
+              <div className="bg-red-500/20 border border-red-500 text-red-100 px-3 py-2 rounded-md text-sm">
+                {error}
+              </div>
+            )}
+            
             <div className="relative flex flex-col gap-2">
               <Label className="font-light text-white text-[12px]">
                 Email or Username
               </Label>
-              <Input className="bg-[#03301d3d] text-white"></Input>
+              <Input 
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
+                className="bg-[#03301d3d] text-white"
+                placeholder="Enter your email"
+                disabled={isSubmitting}
+              />
             </div>
             <div className="relative flex flex-col gap-2">
               <Label className="font-light text-white text-[12px]">
                 Password
               </Label>
               <Input
+                name="password"
                 type="password"
+                value={formData.password}
+                onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
                 className="bg-[#03301d3d] text-white"
-              ></Input>
+                placeholder="Enter your password"
+                disabled={isSubmitting}
+              />
             </div>
             <Button
               onClick={NavigateRecovery}
               variant={"ghost"}
               className="hover:bg-[transparent] cursor-pointer w-auto p-0 m-0 flex justify-end text-right text-white font-light"
+              disabled={isSubmitting}
             >
               Forgot Password?
             </Button>
             <Button
-              onClick={Login}
+              onClick={handleLogin}
               className="cursor-pointer bg-white text-[#3e7c1f] hover:bg-transparent hover:text-white border border-white"
+              disabled={isSubmitting}
             >
-              Login
+              {isSubmitting ? "Logging in..." : "Login"}
             </Button>
             <div className="w-full h-full border-t border-white flex py-6 mt-[7%]">
               <p className="text-[12px] text-white text-center cursor-pointer">

@@ -27,11 +27,14 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import OTPHelp from "@/app/component/auth/otp-scan/OTPHelp";
+import { useUser } from "@/app/context/UserContext";
 
 export default function OTPScan() {
   const router = useRouter();
+  const { user, logout } = useUser();
 
   const NavigateSignIn = () => {
+    logout(); // Clear authentication state
     router.push("/");
   };
 
@@ -58,7 +61,15 @@ export default function OTPScan() {
           <Select>
             <SelectTrigger className="border-none p-0 m-0 rounded-full">
               <div className="border text-[12px] w-auto rounded-full text-white px-1 py-1 flex gap-2 justify-center items-center">
-                <SelectValue placeholder="Choose an email..." />
+                <Avatar className="w-[20px] h-[20px]">
+                  <AvatarImage src={user?.picture || ""} />
+                  <AvatarFallback className="text-[10px]">
+                    {user?.firstname?.charAt(0)}{user?.lastname?.charAt(0)}
+                  </AvatarFallback>
+                </Avatar>
+                <SelectValue 
+                  placeholder={user?.email || "Choose an email..."}
+                />
               </div>
               <p className="text-white font-medium">Not You?</p>
             </SelectTrigger>

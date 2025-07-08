@@ -1,6 +1,9 @@
 // Admin authentication types only
 export interface LoginResponse {
   token: string;
+}
+
+export interface GetAdminResponse {
   admin: AdminUser;
 }
 

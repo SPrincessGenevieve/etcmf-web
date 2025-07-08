@@ -15,7 +15,7 @@ import { useUser } from "@/app/context/UserContext";
 
 export default function Home() {
   const router = useRouter();
-  const { login, isAuthenticated, isLoading } = useUser();
+  const { loginWithToken, isAuthenticated, isLoading } = useUser();
   
   // Form state
   const [formData, setFormData] = useState({
@@ -76,12 +76,13 @@ export default function Home() {
     setIsSubmitting(true);
 
     try {
+      // Login and get token
       const response = await authAPI.loginAdmin(formData.email, formData.password);
       
-      // Store token and user data
-      login(response.token, response.admin);
+      // Use token to fetch user data and store in context
+      await loginWithToken(response.token);
       
-      // Navigate to OTP scan page (maintaining your current flow)
+      // Navigate to OTP scan page 
       router.push("/auth/otp-scan");
       
     } catch (error: any) {

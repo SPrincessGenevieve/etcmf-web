@@ -6,27 +6,20 @@ import {
   useContext,
   useEffect,
 } from "react";
-import { tokenManager } from "@/lib/utils/api";
+import { tokenManager, authAPI } from "@/lib/utils/api";
+import type { AdminUser } from "@/lib/api/types";
 
-type User = {
-  id: string;
-  firstname: string;
-  lastname: string;
-  middlename?: string;
-  email: string;
-  picture?: string;
-  createdAt: string;
-  updatedAt: string;
-};
+type User = AdminUser;
 
 type UserContextType = {
   user: User | null;
   token: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (token: string, user: User) => void;
+  loginWithToken: (token: string) => Promise<void>;
   logout: () => void;
   setUserDetails: (details: Partial<UserContextType>) => void;
+  fetchUserData: () => Promise<void>;
 };
 
 const defaultUserContext: UserContextType = {
@@ -34,9 +27,10 @@ const defaultUserContext: UserContextType = {
   token: null,
   isAuthenticated: false,
   isLoading: true,
-  login: () => {},
+  loginWithToken: async () => {},
   logout: () => {},
   setUserDetails: () => {},
+  fetchUserData: async () => {},
 };
 
 const UserContext = createContext<UserContextType>(defaultUserContext);
@@ -55,23 +49,22 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   });
 
   useEffect(() => {
-    // Check for existing token on app load
-    const token = tokenManager.getToken();
-    if (token && tokenManager.isValidToken(token)) {
-      const savedUserData = localStorage.getItem("userData");
-      if (savedUserData) {
+    // Check for existing token on app load and fetch user data
+    const initializeAuth = async () => {
+      const token = tokenManager.getToken();
+      if (token && tokenManager.isValidToken(token)) {
         try {
-          const user = JSON.parse(savedUserData);
+          // Fetch user data using the token
+          const userResponse = await authAPI.getAdminData();
           setUserDetailsState({
-            user,
+            user: userResponse.admin,
             token,
             isAuthenticated: true,
             isLoading: false,
           });
         } catch (error) {
-          console.error("Failed to parse user data:", error);
+          console.error("Failed to fetch user data:", error);
           tokenManager.removeToken();
-          localStorage.removeItem("userData");
           setUserDetailsState({
             user: null,
             token: null,
@@ -79,26 +72,57 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
             isLoading: false,
           });
         }
+      } else {
+        setUserDetailsState(prev => ({ ...prev, isLoading: false }));
       }
-    } else {
-      setUserDetailsState(prev => ({ ...prev, isLoading: false }));
-    }
+    };
+
+    initializeAuth();
   }, []);
 
-  const login = (token: string, user: User) => {
+  const loginWithToken = async (token: string) => {
+    // Store token and fetch user data
     tokenManager.setToken(token);
-    localStorage.setItem("userData", JSON.stringify(user));
-    setUserDetailsState({
-      user,
-      token,
-      isAuthenticated: true,
-      isLoading: false,
-    });
+    try {
+      const userResponse = await authAPI.getAdminData();
+      setUserDetailsState({
+        user: userResponse.admin,
+        token,
+        isAuthenticated: true,
+        isLoading: false,
+      });
+    } catch (error) {
+      tokenManager.removeToken();
+      setUserDetailsState({
+        user: null,
+        token: null,
+        isAuthenticated: false,
+        isLoading: false,
+      });
+      throw error;
+    }
+  };
+
+  const fetchUserData = async () => {
+    const token = tokenManager.getToken();
+    if (!token) {
+      throw new Error("No token available");
+    }
+
+    try {
+      const userResponse = await authAPI.getAdminData();
+      setUserDetailsState(prev => ({
+        ...prev,
+        user: userResponse.admin,
+      }));
+    } catch (error) {
+      console.error("Failed to fetch user data:", error);
+      throw error;
+    }
   };
 
   const logout = () => {
     tokenManager.removeToken();
-    localStorage.removeItem("userData");
     setUserDetailsState({
       user: null,
       token: null,
@@ -115,9 +139,10 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     <UserContext.Provider 
       value={{ 
         ...userDetails, 
-        login, 
+        loginWithToken, 
         logout, 
-        setUserDetails 
+        setUserDetails,
+        fetchUserData
       }}
     >
       {children}

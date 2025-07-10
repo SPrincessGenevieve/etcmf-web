@@ -20,13 +20,27 @@ import {
 import Notification from "@/app/component/Notification";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
+import { useUserContext } from "@/app/context/UserContext";
+import { useState, useEffect } from "react";
 
 export const Navbar = () => {
+  const router = useRouter();
+  const { adminData, logout } = useUserContext();
+  const [currentDate, setCurrentDate] = useState("");
+  
+  useEffect(() => {
+    // Format the current date 
+    const now = new Date();
+    const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'long', year: 'numeric' };
+    setCurrentDate(now.toLocaleDateString('en-US', options));
+  }, []);
 
-  const router = useRouter()
-
-  const navSetting = () =>{
+  const navSetting = () => {
     router.push("/etcmf/settings")
+  }
+  
+  const handleLogout = () => {
+    logout();
   }
 
   return (
@@ -59,16 +73,16 @@ export const Navbar = () => {
                 <div>
                   <Avatar className="border h-10 w-10">
                     <AvatarImage
-                      src={
-                        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fda%2F51%2Fc2%2Fda51c26fe3398b0f8314fee17a98e0e7.jpg&f=1&nofb=1&ipt=137f15e31469c1debd9a629244c389445f83f68eb0bdcc3e4cf919cc9b649223"
-                      }
+                      src={adminData?.picture || "/default_profile.lottie"}
                     ></AvatarImage>
-                    <AvatarFallback>AS</AvatarFallback>
+                    <AvatarFallback>
+                      {adminData?.firstname?.charAt(0)}{adminData?.lastname?.charAt(0)}
+                    </AvatarFallback>
                   </Avatar>
                 </div>
                 <div>
-                  <Label className="text-[11px]">Hey, Jayde</Label>
-                  <Label className="text-[11px]">04, April 2025</Label>
+                  <Label className="text-[11px]">Hey, {adminData?.firstname || "User"}</Label>
+                  <Label className="text-[11px]">{currentDate}</Label>
                 </div>
               </MenubarTrigger>
               <MenubarContent>
@@ -77,15 +91,17 @@ export const Navbar = () => {
                     <div>
                       <Avatar className="border h-10 w-10">
                         <AvatarImage
-                          src={
-                            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fda%2F51%2Fc2%2Fda51c26fe3398b0f8314fee17a98e0e7.jpg&f=1&nofb=1&ipt=137f15e31469c1debd9a629244c389445f83f68eb0bdcc3e4cf919cc9b649223"
-                          }
+                          src={adminData?.picture || "/default_profile.lottie"}
                         ></AvatarImage>
-                        <AvatarFallback>AS</AvatarFallback>
+                        <AvatarFallback>
+                          {adminData?.firstname?.charAt(0)}{adminData?.lastname?.charAt(0)}
+                        </AvatarFallback>
                       </Avatar>
                     </div>
                     <div className="w-full flex flex-col">
-                      <Label className="text-[11px]">Jayde Mike Engracia</Label>
+                      <Label className="text-[11px]">
+                        {`${adminData?.firstname || ''} ${adminData?.middlename ? adminData.middlename + ' ' : ''}${adminData?.lastname || ''}`}
+                      </Label>
                       <Label onClick={navSetting} className="cursor-pointer text-[11px] text-green-700 font-light">
                         View Profile
                       </Label>
@@ -101,7 +117,7 @@ export const Navbar = () => {
                 <MenubarItem>
                   <Headset></Headset> Help & Support
                 </MenubarItem>
-                <MenubarItem>
+                <MenubarItem onClick={handleLogout}>
                   <LogOut></LogOut> Logout
                 </MenubarItem>
               </MenubarContent>

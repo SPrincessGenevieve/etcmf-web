@@ -30,3 +30,26 @@ export type ServiceLogsProps = {
   role: string;
   post: string;
 };
+
+
+export type AdminData = {
+  id?: string;
+  firstname?: string;
+  lastname?: string;
+  middlename?: string;
+  email?: string;
+  picture?: string;
+  createdAt?: string;
+  updatedAt?: string;
+};
+
+export type UserContextType = {
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  adminData: AdminData | null;
+  isOpen: boolean;
+  setUserDetails: (details: Partial<UserContextType>) => void;
+  login: (email: string, password: string) => Promise<boolean>;
+  logout: () => void;
+  fetchAdminData: () => Promise<void>;
+};

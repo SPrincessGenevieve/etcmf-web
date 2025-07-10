@@ -1,12 +1,13 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
-import { CircleArrowLeft, CircleArrowRight } from "lucide-react";
+import { CircleArrowLeft, CircleArrowRight, LogOut } from "lucide-react";
 import { sidebar_items } from "@/lib/route/sidebar-items";
 import { useRouter, usePathname } from "next/navigation";
 import Loading from "../Loading";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator";
+import { useUserContext } from "@/app/context/UserContext";
 
 export default function Sidebar() {
   const [isClose, setIsClose] = useState(false);
@@ -16,6 +17,7 @@ export default function Sidebar() {
   const [activeLoadingLink, setActiveLoadingLink] = useState<string | null>(
     null
   );
+  const { adminData, logout } = useUserContext();
 
   const handleSidebar = () => {
     setIsClose(!isClose);
@@ -39,6 +41,13 @@ export default function Sidebar() {
   const handleNavigate = (link: string) => {
     setActiveLoadingLink(link); // ✅ Show spinner only for this item
     router.push(link);
+  };
+  
+  const handleLogout = () => {
+    setActiveLoadingLink("logout");
+    setTimeout(() => {
+      logout();
+    }, 500); 
   };
 
   return (
@@ -67,18 +76,18 @@ export default function Sidebar() {
         </div>
         <div className="w-full flex flex-col items-center justify-center p-2">
           <Image
-            src={
-              "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2Foriginals%2Fda%2F51%2Fc2%2Fda51c26fe3398b0f8314fee17a98e0e7.jpg&f=1&nofb=1&ipt=137f15e31469c1debd9a629244c389445f83f68eb0bdcc3e4cf919cc9b649223"
-            }
-            className="rounded-full"
-            alt=""
+            src={adminData?.picture || "/default_profile.lottie"}
+            className="rounded-full object-cover w-16 h-16"
+            alt="Profile"
             width={200}
-            height={400}
-          ></Image>
+            height={200}
+          />
           {collapse !== 1 && !isClose && (
             <>
-              <h1 className="font-semibold text-white">Jayde Mike Engracia</h1>
-              <p className="font-light text-white">Treasurer</p>
+              <h1 className="font-semibold text-white text-center mt-2">
+                {adminData ? `${adminData.firstname} ${adminData.lastname}` : "Loading..."}
+              </h1>
+              <p className="font-light text-white text-sm">Administrator</p>
             </>
           )}
         </div>
@@ -113,6 +122,26 @@ export default function Sidebar() {
               </div>
             );
           })}
+          
+          {/* Logout button */}
+          <div className="relative mt-4">
+            {activeLoadingLink === "logout" && (
+              <div className="absolute inset-0 flex justify-center items-center bg-[#ffffff38] rounded-[5px]">
+                <Loading strokeColor="white"></Loading>
+              </div>
+            )}
+            <div
+              onClick={handleLogout}
+              className="cursor-pointer flex transition-all ease-in-out p-2 rounded-[5px] hover:bg-[#0000002f]"
+            >
+              <div className="flex gap-2 pl-1 text-white items-center">
+                <LogOut className="w-5 h-5 text-white" />
+                <p className={`${collapse || isClose ? "hidden" : ""}`}>
+                  Logout
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -9,33 +9,57 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import "@/app/globals.css";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Loading from "./component/Loading";
+import { useUserContext } from "./context/UserContext";
+import AuthRoute from "./middleware/AuthRoute";
 
 export default function Home() {
   const router = useRouter();
   const [recoverLoading, setRecoveryLoading] = useState(false);
   const [loginLoading, setLoginLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const { login } = useUserContext();
 
   const NavigateRecovery = () => {
-    setRecoveryLoading(true)
+    setRecoveryLoading(true);
     router.push("/auth/recovery");
   };
 
-  const Login = () => {
-    setLoginLoading(true)
-    router.push("/auth/otp-scan");
+  const handleLogin = async () => {
+    setError("");
+    if (!email || !password) {
+      setError("Email and password are required");
+      return;
+    }
+
+    setLoginLoading(true);
+    try {
+      const success = await login(email, password);
+      if (success) {
+        router.push("/etcmf/dashboard");
+      } else {
+        setError("Invalid credentials. Please try again.");
+        setLoginLoading(false);
+      }
+    } catch (err) {
+      setError("An error occurred during login");
+      setLoginLoading(false);
+    }
   };
 
   return (
-    <div className="bg-[#0B6540] w-full h-screen flex items-center justify-center login_container">
-      <Image
-        width={400}
-        height={400}
-        className="w-[70vh] h-[50vh] absolute top-0 left-0"
-        src={Lines2}
-        alt=""
-      ></Image>
+    <AuthRoute>
+      <div className="bg-[#0B6540] w-full h-screen flex items-center justify-center login_container">
+        <Image
+          width={400}
+          height={400}
+          className="w-[70vh] h-[50vh] absolute top-0 left-0"
+          src={Lines2}
+          alt=""
+        ></Image>
       <Image
         width={400}
         height={400}
@@ -78,7 +102,11 @@ export default function Home() {
               <Label className="font-light text-white text-[12px]">
                 Email or Username
               </Label>
-              <Input className="bg-[#03301d3d] text-white"></Input>
+              <Input 
+                className="bg-[#03301d3d] text-white" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
             <div className="relative flex flex-col gap-2">
               <Label className="font-light text-white text-[12px]">
@@ -87,8 +115,13 @@ export default function Home() {
               <Input
                 type="password"
                 className="bg-[#03301d3d] text-white"
-              ></Input>
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
+            {error && (
+              <p className="text-red-300 text-sm">{error}</p>
+            )}
             <Button
               onClick={NavigateRecovery}
               variant={"ghost"}
@@ -98,8 +131,9 @@ export default function Home() {
               Forgot Password?
             </Button>
             <Button
-              onClick={Login}
+              onClick={handleLogin}
               className="relative cursor-pointer bg-white text-[#3e7c1f] hover:bg-transparent hover:text-white border border-white"
+              disabled={loginLoading}
             >
               {loginLoading && <Loading strokeColor="green"></Loading>}
               Login
@@ -113,9 +147,10 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <p className="text-white flex justify-center items-center absolute bottom-10">
-        eTCMF | 2025
-      </p>
-    </div>
+        <p className="text-white flex justify-center items-center absolute bottom-10">
+          eTCMF | 2025
+        </p>
+      </div>
+    </AuthRoute>
   );
 }
